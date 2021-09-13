@@ -19,12 +19,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $this->authorize('show_user');
+
         $model_query = User::query()->with('roles')->orderByDesc('id')->filter();
 
         return Inertia::render('Users/Index', [
             'users' => function () use ($model_query) {
-                return UserResource::collection($model_query->paginate(10));
+                return UserResource::collection($model_query->paginate(10)->withQueryString());
             },
+            'roles' => Role::all(),
+            'filter' => [
+                'status' => $request->has('status') ? $request->status : 'all status',
+                'role' => $request->has('role') ? $request->role : 'all roles',
+            ],
         ], '/users');
     }
 

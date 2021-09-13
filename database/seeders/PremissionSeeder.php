@@ -22,6 +22,11 @@ class PremissionSeeder extends Seeder
         'edit_role',
         'show_role',
         'delete_role',
+        // products permisions
+        'create_product',
+        'edit_product',
+        'show_product',
+        'delete_product',
     ];
     /**
      * Run the database seeds.

@@ -61,12 +61,15 @@ class User extends Authenticatable
 
     public function scopeFilter($query)
     {
+        if (request()->has('status') && request()->status !== "all status") {
+            $query->where('is_active', request()->status);
+        }
+        if (request()->has('role') && request()->role !== "all roles") {
+            $query->role(request()->role);
+        }
+
         !request()->name ?: $query->where('name', 'LIKE', '%' . request()->name . '%');
         !request()->email ?: $query->where('email', 'LIKE', '%' . request()->email . '%');
-
-        !request()->role ?: $query->whereHas('roles', function (Builder $query) {
-            $query->where('name', 'like', '%' . request()->role . '%');
-        });
     }
 
 }

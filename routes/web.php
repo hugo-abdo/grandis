@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -40,4 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     // role routes
     Route::resource('roles', RoleController::class);
+
+    // products routes
+    Route::resource('products', ProductController::class);
 });

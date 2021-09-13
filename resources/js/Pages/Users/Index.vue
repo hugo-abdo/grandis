@@ -39,6 +39,26 @@
 				<i class="las la-check-circle text-3xl"></i>
 			</action-button>
 		</Actions>
+		<!-- filter -->
+		<card class="px-0 py-1 inline-flex">
+			<input-select
+				@change="$store.dispatch('getUsersWithFilter',filterData)"
+				v-model="filterData.status"
+				class="border-none focus:ring-0 py-0 shadow-none"
+			>
+				<option value="all status">all status</option>
+				<option value="1">active</option>
+				<option value="0">not active</option>
+			</input-select>
+			<input-select
+				@change="$store.dispatch('getUsersWithFilter',filterData)"
+				v-model="filterData.role"
+				class="border-none focus:ring-0 py-0 shadow-none"
+			>
+				<option value="all roles">all roles</option>
+				<option v-for="role in roles" :value="role.name" :key="role.id">{{role.name}}</option>
+			</input-select>
+		</card>
 		<!-- users table -->
 		<v-table
 			@selected="(data)=> $store.commit('SELECTUSERS',data)"
@@ -123,9 +143,10 @@ import { useStore } from "vuex";
 import can from "@/mixins";
 import InputSwitch from "@/components/InputSwitch.vue";
 import ActionButton from "@/components/ActionButton.vue";
+import InputSelect from "@/components/InputSelect.vue";
 
 export default defineComponent({
-	props: ["users"],
+	props: ["users", "filter", "roles"],
 	components: {
 		Link,
 		VTable,
@@ -136,11 +157,16 @@ export default defineComponent({
 		LogMoreData,
 		InputSwitch,
 		ActionButton,
+		InputSelect,
 	},
 
 	setup(props) {
 		const store = useStore();
 		const page = usePage();
+
+		const filterData = ref({
+			...props.filter,
+		});
 
 		// init the store and add the first arr of users
 		store.commit("INIT", page.props.value);
@@ -176,7 +202,7 @@ export default defineComponent({
 
 		store.commit("SET_TABLE_FIELDS", fields);
 
-		return { changeUserStatus };
+		return { changeUserStatus, filterData };
 	},
 });
 </script>

@@ -280,6 +280,12 @@ export default defineComponent({
 				iconClass: "las la-user-shield",
 				condition: can("show_role"),
 			},
+			{
+				name: "products",
+				pathName: "products.index",
+				iconClass: "las la-store-alt",
+				condition: can("show_product"),
+			},
 		];
 
 		function logout() {

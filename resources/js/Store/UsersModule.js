@@ -48,6 +48,21 @@ export default {
         },
     },
     actions: {
+        // get users with filter
+        getUsersWithFilter: debounce(({ commit, state }, p) => {
+            Inertia.get(
+                route("users.index"),
+                {
+                    status: p.status,
+                    role: p.role,
+                },
+                {
+                    onSuccess(page) {
+                        console.log(page);
+                    },
+                }
+            );
+        }, 100),
         // get pagineted users
         getMoreUsers: debounce(({ commit, state }) => {
             if (!state.links.next) {
