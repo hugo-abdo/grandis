@@ -78,6 +78,7 @@ export default {
 	components: { badge, Link, ActionButton },
 	setup() {
 		const store = useStore();
+
 		const page = usePage();
 
 		onUnmounted(
