@@ -21,7 +21,7 @@ export default defineComponent({
 		classes() {
 			return this.active
 				? "!text-white shadow-groadis active:shadow-none bg-gradient-to-r from-groadis to-indigo-300"
-				: "hover:text-gray-400 dark:hover:text-gray-400 focus:text-gray-700 dark:text-white ";
+				: "hover:text-gray-400 duration-200 dark:hover:text-gray-400 focus:text-gray-700 duration-200 dark:text-white ";
 		},
 	},
 });

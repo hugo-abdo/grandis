@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="text-gray-700 dark:text-white dark:hover:bg-gray-500 hover:bg-gray-200 dark:focus-within:bg-gray-500 focus-within:bg-gray-200"
+		class="text-gray-700 duration-200 dark:text-white duration-200 dark:hover:bg-gray-500 hover:bg-gray-200 duration-200 dark:focus-within:bg-gray-500 focus-within:bg-gray-200"
 	>
 		<button
 			type="submit"

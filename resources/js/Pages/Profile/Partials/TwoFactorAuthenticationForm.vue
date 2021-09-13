@@ -6,22 +6,22 @@
 
 		<template #content>
 			<h3
-				class="text-lg font-medium dark:text-white text-gray-900"
+				class="text-lg font-medium duration-200 dark:text-white text-gray-900"
 				v-if="twoFactorEnabled"
 			>You have enabled two factor authentication.</h3>
 
 			<h3
-				class="text-lg font-medium dark:text-white text-gray-900"
+				class="text-lg font-medium duration-200 dark:text-white text-gray-900"
 				v-else
 			>You have not enabled two factor authentication.</h3>
 
-			<div class="mt-3 max-w-xl text-sm dark:text-white text-gray-600">
+			<div class="mt-3 max-w-xl text-sm duration-200 dark:text-white text-gray-600">
 				<p>When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.</p>
 			</div>
 
 			<div v-if="twoFactorEnabled">
 				<div v-if="qrCode">
-					<div class="mt-4 max-w-xl text-sm dark:text-white text-gray-600">
+					<div class="mt-4 max-w-xl text-sm duration-200 dark:text-white text-gray-600">
 						<p
 							class="font-semibold"
 						>Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.</p>
@@ -31,7 +31,7 @@
 				</div>
 
 				<div v-if="recoveryCodes.length > 0">
-					<div class="mt-4 max-w-xl text-sm dark:text-white text-gray-600">
+					<div class="mt-4 max-w-xl text-sm duration-200 dark:text-white text-gray-600">
 						<p
 							class="font-semibold"
 						>Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.</p>

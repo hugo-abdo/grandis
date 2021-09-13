@@ -30,7 +30,7 @@
 						<div v-for="permission in availablePermissions" :key="permission">
 							<label class="flex items-center">
 								<jet-checkbox :value="permission" v-model:checked="createApiTokenForm.permissions" />
-								<span class="ml-2 text-sm text-gray-600 dark:text-white">{{ permission }}</span>
+								<span class="ml-2 text-sm text-gray-600 duration-200 dark:text-white">{{ permission }}</span>
 							</label>
 						</div>
 					</div>

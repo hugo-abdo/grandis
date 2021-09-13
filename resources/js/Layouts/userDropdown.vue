@@ -4,7 +4,7 @@
 		<div>
 			<MenuButton>
 				<div class="flex items-center cursor-pointer">
-					<div class="mr-3 font-semibold text-gray-500 capitalize dark:text-white">
+					<div class="mr-3 font-semibold text-gray-500 capitalize duration-200 dark:text-white">
 						<span class="block text-sm md:text-base">hugo</span>
 						<span class="float-right text-xs">admin</span>
 					</div>

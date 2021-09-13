@@ -6,7 +6,7 @@
 
 		<template #content>
 			<div
-				class="max-w-xl text-sm dark:text-white text-gray-600"
+				class="max-w-xl text-sm duration-200 dark:text-white text-gray-600"
 			>If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.</div>
 
 			<!-- Other Browser Sessions -->
@@ -20,7 +20,7 @@
 							stroke-width="2"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
-							class="w-8 h-8 dark:text-white text-gray-500"
+							class="w-8 h-8 duration-200 dark:text-white text-gray-500"
 							v-if="session.agent.is_desktop"
 						>
 							<path
@@ -36,7 +36,7 @@
 							fill="none"
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							class="w-8 h-8 dark:text-white text-gray-500"
+							class="w-8 h-8 duration-200 dark:text-white text-gray-500"
 							v-else
 						>
 							<path d="M0 0h24v24H0z" stroke="none" />
@@ -47,11 +47,11 @@
 
 					<div class="ml-3">
 						<div
-							class="text-sm dark:text-white text-gray-600"
+							class="text-sm duration-200 dark:text-white text-gray-600"
 						>{{ session.agent.platform }} - {{ session.agent.browser }}</div>
 
 						<div>
-							<div class="text-xs dark:text-white text-gray-500">
+							<div class="text-xs duration-200 dark:text-white text-gray-500">
 								{{ session.ip_address }},
 								<span
 									class="text-green-500 font-semibold"

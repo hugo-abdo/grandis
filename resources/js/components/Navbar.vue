@@ -1,6 +1,6 @@
 <template>
 	<!-- Primary Navigation Menu -->
-	<div class="shadow rounded-md bg-white dark:bg-groadis-dark" ref="container">
+	<div class="shadow rounded-md bg-white duration-200 dark:bg-groadis-dark" ref="container">
 		<div class="inline-flex items-center py-2 px-4 space-x-4 w-full">
 			<template v-for="(link,index) in links" :key="index">
 				<template v-if="index+1 < showCount">

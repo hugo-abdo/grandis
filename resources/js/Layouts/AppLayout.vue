@@ -4,9 +4,9 @@
 
 		<jet-banner />
 
-		<div class="min-h-screen bg-gray-100 dark:bg-groadis-darker">
+		<div class="min-h-screen bg-gray-100 duration-200 dark:bg-groadis-darker">
 			<nav
-				class="bg-white dark:bg-groadis-dark border-b shadow border-gray-100 dark:border-groadis-dark"
+				class="bg-white duration-200 dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark"
 			>
 				<!-- Primary Navigation Menu -->
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +28,11 @@
 							<div class="hidden sm:flex sm:items-center sm:ml-6">
 								<!-- Settings Dropdown -->
 								<div class="ml-3 relative">
-									<jet-dropdown align="right" width="48" contentClasses="bg-white dark:bg-groadis-dark mt-2">
+									<jet-dropdown
+										align="right"
+										width="48"
+										contentClasses="bg-white duration-200 dark:bg-groadis-dark mt-2"
+									>
 										<template #trigger>
 											<button
 												v-if="$page.props.jetstream.managesProfilePhotos"
@@ -138,10 +142,10 @@
 
 							<div>
 								<div
-									class="font-medium text-base text-gray-800 dark:text-gray-200"
+									class="font-medium text-base text-gray-800 duration-200 dark:text-gray-200"
 								>{{ $page.props.user.name }}</div>
 								<div
-									class="font-medium text-sm text-gray-500 dark:text-gray-400"
+									class="font-medium text-sm text-gray-500 duration-200 dark:text-gray-400"
 								>{{ $page.props.user.email }}</div>
 							</div>
 						</div>

@@ -6,7 +6,7 @@
 				<div class="overflow-hidden sm:rounded-lg">
 					<table class="min-w-full whitespace-nowrap">
 						<thead>
-							<tr class="dark:text-white text-gray-500">
+							<tr class="duration-200 dark:text-white text-gray-500">
 								<template v-for="(field, index) in fields" :key="index">
 									<th scope="col" class="p-3 text-base font-medium tracking-wider text-left capitalize">
 										<slot
