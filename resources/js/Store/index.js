@@ -5,12 +5,10 @@ import actions from "./Actions";
 
 // Create a new store instance.
 export default createStore({
-    state() {},
+    state: () => ({ isDark: false }),
 
     actions,
-
     mutations: {},
-
     modules: {
         UsersModule,
         RolesModule,

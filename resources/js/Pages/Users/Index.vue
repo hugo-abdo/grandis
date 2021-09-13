@@ -1,7 +1,44 @@
 <template>
 	<app-layout title="Users">
 		<!-- add new User -->
-		<Actions :selection="$store.state.UsersModule.selectedUsers" />
+		<Actions>
+			<action-button
+				v-if="can('create_user')"
+				:isActive="true"
+				class="bg-groadis text-white"
+				tooltipMsg="Add New User"
+			>
+				<Link :href="route('users.create')">
+					<i class="las la-plus-circle text-3xl"></i>
+				</Link>
+			</action-button>
+
+			<delete-user
+				v-if="can('delete_user')"
+				:data="$store.state.UsersModule.selectedUsers"
+				#="{activate}"
+			>
+				<action-button
+					@click="activate"
+					:isActive="$store.state.UsersModule.selectedUsers.length"
+					tooltipMsg="Delete Selection"
+					class="bg-white !text-red-500"
+				>
+					<i class="lar la-trash-alt text-3xl"></i>
+				</action-button>
+			</delete-user>
+
+			<!-- this function need  time -->
+			<action-button
+				@click="$store.dispatch('changeAllUsersStatus')"
+				v-if="can('edit_user_status')"
+				:isActive="$store.state.UsersModule.selectedUsers.length"
+				tooltipMsg="this Action is not ready"
+				class="bg-white !text-green-500"
+			>
+				<i class="las la-check-circle text-3xl"></i>
+			</action-button>
+		</Actions>
 		<!-- users table -->
 		<v-table
 			@selected="(data)=> $store.commit('SELECTUSERS',data)"
@@ -76,7 +113,7 @@
 import { computed, defineComponent, ref } from "vue";
 import VTable from "@/components/v-table.vue";
 import Badge from "@/components/badge.vue";
-import Actions from "@/Pages/Users/Actions.vue";
+import Actions from "@/components/Actions.vue";
 import DeleteUser from "@/Pages/Users/DeleteUser.vue";
 import Edit from "@/Pages/Users/Edit.vue";
 import LogMoreData from "@/Pages/Users/LogMoreData.vue";
@@ -85,6 +122,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { useStore } from "vuex";
 import can from "@/mixins";
 import InputSwitch from "@/components/InputSwitch.vue";
+import ActionButton from "@/components/ActionButton.vue";
 
 export default defineComponent({
 	props: ["users"],
@@ -97,6 +135,7 @@ export default defineComponent({
 		Badge,
 		LogMoreData,
 		InputSwitch,
+		ActionButton,
 	},
 
 	setup(props) {

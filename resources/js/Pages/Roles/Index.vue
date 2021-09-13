@@ -1,6 +1,6 @@
 <template>
 	<app-layout title="Roles And Permissions">
-		<h1 class="text-gray-600 font-semibold text-3xl">Roles And Permissions</h1>
+		<h1 class="text-gray-600 dark:text-gray-300 font-semibold text-3xl">Roles And Permissions</h1>
 		<div class="fixed z-50 right-0 top-2/4 flex items-center">
 			<div class="flex flex-col space-y-2 bg-gray-100 border-l py-4 pl-2 rounded-l-3xl">
 				<action-button :isActive="true" class="bg-groadis text-white" tooltipMsg="Add New Role">
@@ -47,7 +47,7 @@
 					</span>
 				</div>
 				<div class="mt-2">
-					<span class="text-gray-600 font-medium">Permissions :</span>
+					<span class="text-gray-600 dark:text-gray-300 font-medium">Permissions :</span>
 					<ul class="mt-2 flex flex-wrap gap-1">
 						<li
 							class="min-w-max font-medium capitalize text-blue-700"
@@ -69,16 +69,14 @@
 <script>
 import { usePage, Link } from "@inertiajs/inertia-vue3";
 import { useStore } from "vuex";
-import badge from "../../components/badge.vue";
-import Actions from "../Users/Actions.vue";
-import ActionButton from "../../components/ActionButton.vue";
+import badge from "@/components/badge.vue";
+import ActionButton from "@/components/ActionButton.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { onUnmounted } from "@vue/runtime-core";
 export default {
 	components: { badge, Link, ActionButton },
 	setup() {
 		const store = useStore();
-
 		const page = usePage();
 
 		onUnmounted(

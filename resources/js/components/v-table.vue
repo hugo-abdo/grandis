@@ -4,7 +4,7 @@
 		<div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" id="table">
 			<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
 				<div class="overflow-hidden sm:rounded-lg">
-					<table class="min-w-full divide-y divide-gray-200 whitespace-nowrap">
+					<table class="min-w-full whitespace-nowrap">
 						<thead>
 							<tr class="dark:text-white text-gray-500">
 								<template v-for="(field, index) in fields" :key="index">

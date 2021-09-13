@@ -1,11 +1,11 @@
 <template>
 	<tr
-		class="duration-200 transform hover:-translate-y-1 hover:shadow-lg text-gray-500 shadow-md"
+		class="duration-200 transform hover:-translate-y-1 hover:shadow-lg shadow-md"
 		:class=" [item.showDetails || item.selected || item.showEdit ? ' !shadow-groadis' : '']"
 	>
 		<template v-for="(field, index) in fields" :key="field.name">
 			<td
-				class="p-3 font-medium tracking-wider text-left text-sm capitalize"
+				class="p-3 font-medium tracking-wider text-left text-sm capitalize dark:bg-groadis-dark dark:text-white"
 				:class=" [field.fieldClass ,item.showDetails || item.selected || item.showEdit ? '!bg-groadis !text-white' : 'bg-white']"
 			>
 				<label

@@ -31,17 +31,12 @@
 						/>
 						<jet-input-error :message="form.errors.email" class="mt-2" />
 					</div>
+
 					<div class="col-span-8 sm:col-span-4">
 						<jet-label for="role" value="Role" />
-						<select
-							v-model="form.role"
-							id="role"
-							name="role"
-							autocomplete="role"
-							class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-						>
+						<input-select v-model="form.role" id="role" name="role" autocomplete="role">
 							<option v-for="role in roles" :key="role.id" :value="role.id">{{role.name}}</option>
-						</select>
+						</input-select>
 						<jet-input-error :message="form.errors.role" class="mt-2" />
 					</div>
 
@@ -95,6 +90,7 @@ import JetInputError from "@/Jetstream/InputError.vue";
 import JetActionMessage from "@/Jetstream/ActionMessage.vue";
 import JetButton from "@/Jetstream/Button.vue";
 import Divider from "@/components/divider.vue";
+import InputSelect from "@components/InputSelect.vue";
 export default {
 	components: {
 		JetLabel,
@@ -104,6 +100,7 @@ export default {
 		JetActionMessage,
 		JetButton,
 		Divider,
+		InputSelect,
 	},
 	props: ["roles"],
 	setup() {

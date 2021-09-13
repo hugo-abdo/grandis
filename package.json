@@ -9,6 +9,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.4.1",
         "@heroicons/vue": "^1.0.4",
+        "@vueuse/core": "^6.3.3",
         "axios": "^0.21.3",
         "lodash": "^4.17.21",
         "v-tooltip": "https://github.com/paulshen/v-tooltip.git#vue3",

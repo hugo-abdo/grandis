@@ -4,7 +4,7 @@ const colors = require("tailwindcss/colors");
 module.exports = {
     mode: "jit",
     purge: ["./resources/**/*.{js,vue}"],
-
+    darkMode: "class",
     theme: {
         extend: {
             fontFamily: {
@@ -18,6 +18,9 @@ module.exports = {
                     }
                     return `rgb(var(--groadis-color))`;
                 },
+                "groadis-dark": colors.coolGray[700],
+                "groadis-darker": colors.coolGray[900],
+                gray: colors.coolGray,
                 cyan: colors.cyan,
                 fuchsia: colors.fuchsia,
                 lightBlue: colors.lightBlue,

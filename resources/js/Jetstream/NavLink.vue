@@ -20,8 +20,8 @@ export default defineComponent({
 	computed: {
 		classes() {
 			return this.active
-				? "!text-white shadow-groadis active:shadow-none bg-gradient-to-r from-groadis to-indigo-400"
-				: "hover:text-gray-400 focus:text-gray-700 ";
+				? "!text-white shadow-groadis active:shadow-none bg-gradient-to-r from-groadis to-indigo-300"
+				: "hover:text-gray-400 dark:hover:text-gray-400 focus:text-gray-700 dark:text-white ";
 		},
 	},
 });

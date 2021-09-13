@@ -4,8 +4,10 @@
 
 		<jet-banner />
 
-		<div class="min-h-screen bg-gray-100">
-			<nav class="bg-white border-b shadow border-gray-100">
+		<div class="min-h-screen bg-gray-100 dark:bg-groadis-darker">
+			<nav
+				class="bg-white dark:bg-groadis-dark border-b shadow border-gray-100 dark:border-groadis-dark"
+			>
 				<!-- Primary Navigation Menu -->
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div class="flex justify-between items-center py-2">
@@ -13,68 +15,74 @@
 							<!-- Logo -->
 							<div class="flex-shrink-0 flex items-center">
 								<Link :href="route('dashboard')">
-									<jet-application-mark />
+									<jet-application-mark :isDark="isDark" />
 								</Link>
 							</div>
 						</div>
+						<div class="flex items-center">
+							<i
+								@click="toggleDark"
+								class="lar la-moon bg-gray-300 rounded-full shadow-md active:shadow-none cursor-pointer py-0.5 px-1 leading-none text-gray-600 text-xl"
+							></i>
 
-						<div class="hidden sm:flex sm:items-center sm:ml-6">
-							<!-- Settings Dropdown -->
-							<div class="ml-3 relative">
-								<jet-dropdown align="right" width="48">
-									<template #trigger>
-										<button
-											v-if="$page.props.jetstream.managesProfilePhotos"
-											class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition"
-										>
-											<img
-												class="h-8 w-8 rounded-full object-cover"
-												:src="$page.props.user.profile_photo_url"
-												:alt="$page.props.user.name"
-											/>
-										</button>
-
-										<span v-else class="inline-flex rounded-md">
+							<div class="hidden sm:flex sm:items-center sm:ml-6">
+								<!-- Settings Dropdown -->
+								<div class="ml-3 relative">
+									<jet-dropdown align="right" width="48" contentClasses="bg-white dark:bg-groadis-dark mt-2">
+										<template #trigger>
 											<button
-												type="button"
-												class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+												v-if="$page.props.jetstream.managesProfilePhotos"
+												class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition"
 											>
-												{{ $page.props.user.name }}
-												<svg
-													class="ml-2 -mr-0.5 h-4 w-4"
-													xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														fill-rule="evenodd"
-														d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-														clip-rule="evenodd"
-													/>
-												</svg>
+												<img
+													class="h-8 w-8 rounded-full object-cover"
+													:src="$page.props.user.profile_photo_url"
+													:alt="$page.props.user.name"
+												/>
 											</button>
-										</span>
-									</template>
 
-									<template #content>
-										<!-- Account Management -->
-										<div class="block px-4 py-2 text-xs text-gray-400">Manage Account</div>
+											<span v-else class="inline-flex rounded-md">
+												<button
+													type="button"
+													class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+												>
+													{{ $page.props.user.name }}
+													<svg
+														class="ml-2 -mr-0.5 h-4 w-4"
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 20 20"
+														fill="currentColor"
+													>
+														<path
+															fill-rule="evenodd"
+															d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+															clip-rule="evenodd"
+														/>
+													</svg>
+												</button>
+											</span>
+										</template>
 
-										<jet-dropdown-link :href="route('profile.show')">Profile</jet-dropdown-link>
+										<template #content>
+											<!-- Account Management -->
+											<div class="block px-4 py-2 text-xs text-gray-400">Manage Account</div>
 
-										<jet-dropdown-link
-											:href="route('api-tokens.index')"
-											v-if="$page.props.jetstream.hasApiFeatures"
-										>API Tokens</jet-dropdown-link>
+											<jet-dropdown-link :href="route('profile.show')">Profile</jet-dropdown-link>
 
-										<div class="border-t border-gray-100"></div>
+											<jet-dropdown-link
+												:href="route('api-tokens.index')"
+												v-if="$page.props.jetstream.hasApiFeatures"
+											>API Tokens</jet-dropdown-link>
 
-										<!-- Authentication -->
-										<form @submit.prevent="logout">
-											<jet-dropdown-link as="button">Log Out</jet-dropdown-link>
-										</form>
-									</template>
-								</jet-dropdown>
+											<div class="border-t border-gray-100"></div>
+
+											<!-- Authentication -->
+											<form @submit.prevent="logout">
+												<jet-dropdown-link as="button">Log Out</jet-dropdown-link>
+											</form>
+										</template>
+									</jet-dropdown>
+								</div>
 							</div>
 						</div>
 
@@ -129,8 +137,12 @@
 							</div>
 
 							<div>
-								<div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
-								<div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
+								<div
+									class="font-medium text-base text-gray-800 dark:text-gray-200"
+								>{{ $page.props.user.name }}</div>
+								<div
+									class="font-medium text-sm text-gray-500 dark:text-gray-400"
+								>{{ $page.props.user.email }}</div>
 							</div>
 						</div>
 
@@ -215,7 +227,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import JetApplicationMark from "@/Jetstream/ApplicationMark.vue";
 import JetBanner from "@/Jetstream/Banner.vue";
 import JetDropdown from "@/Jetstream/Dropdown.vue";
@@ -224,11 +236,12 @@ import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Navbar from "../components/Navbar.vue";
+import { useDark, useToggle } from "@vueuse/core";
+import { Inertia } from "@inertiajs/inertia";
+import can from "@/mixins";
 
 export default defineComponent({
-	props: {
-		title: String,
-	},
+	props: { title: String },
 
 	components: {
 		Head,
@@ -242,49 +255,38 @@ export default defineComponent({
 		Navbar,
 	},
 
-	data() {
-		return {
-			showingNavigationDropdown: false,
-			links: [
-				{
-					name: "dashboard",
-					pathName: "dashboard",
-					badge: 9,
-					iconClass: "las la-home",
-					condition: true,
-				},
-				{
-					name: "users",
-					pathName: "users.index",
-					iconClass: "las la-users",
-					condition: this.can("show_user"),
-				},
-				{
-					name: "roles",
-					pathName: "roles.index",
-					iconClass: "las la-user-shield",
-					condition: this.can("show_role"),
-				},
-			],
-		};
-	},
+	setup() {
+		const showingNavigationDropdown = ref(false);
+		const links = [
+			{
+				name: "dashboard",
+				pathName: "dashboard",
+				badge: 9,
+				iconClass: "las la-home",
+				condition: true,
+			},
+			{
+				name: "users",
+				pathName: "users.index",
+				iconClass: "las la-users",
+				condition: can("show_user"),
+			},
+			{
+				name: "roles",
+				pathName: "roles.index",
+				iconClass: "las la-user-shield",
+				condition: can("show_role"),
+			},
+		];
 
-	methods: {
-		switchToTeam(team) {
-			this.$inertia.put(
-				route("current-team.update"),
-				{
-					team_id: team.id,
-				},
-				{
-					preserveState: false,
-				}
-			);
-		},
+		function logout() {
+			Inertia.post(route("logout"));
+		}
 
-		logout() {
-			this.$inertia.post(route("logout"));
-		},
+		const isDark = useDark();
+		const toggleDark = useToggle(isDark);
+
+		return { logout, isDark, toggleDark, showingNavigationDropdown, links };
 	},
 });
 </script>
