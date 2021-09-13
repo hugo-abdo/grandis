@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
         ])->assignRole(Role::findById(1));
 
         User::factory(100)->create()->each(function ($user) {
-            $user->assignRole(Role::findById(2));
+            $user->assignRole(Role::findById(random_int(2, 4)));
         });
     }
 }
