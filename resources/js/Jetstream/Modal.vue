@@ -25,7 +25,7 @@
 				>
 					<div
 						v-show="show"
-						class="mb-6 bg-white duration-200 dark:bg-groadis-dark duration-200 dark:text-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
+						class="mb-6 bg-white duration-200 dark:bg-groadis-dark dark:text-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
 						:class="maxWidthClass"
 					>
 						<slot v-if="show"></slot>

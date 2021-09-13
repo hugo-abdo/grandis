@@ -5,7 +5,7 @@
 	>
 		<template v-for="(field, index) in fields" :key="field.name">
 			<td
-				class="p-3 font-medium tracking-wider text-left text-sm capitalize duration-200 dark:bg-groadis-dark duration-200 dark:text-white"
+				class="p-3 font-medium tracking-wider text-left text-sm capitalize dark:bg-groadis-dark duration-200 dark:text-white"
 				:class=" [field.fieldClass ,item.showDetails || item.selected || item.showEdit ? '!bg-groadis !text-white' : 'bg-white']"
 			>
 				<label
@@ -73,7 +73,7 @@
 		<tr key="details" v-if="showDeatails">
 			<td colspan="12">
 				<div
-					class="shadow rounded-lg text-gray-500 bg-white shadow-lg duration-200 dark:bg-groadis-dark duration-200 dark:text-white w-[92vw] md:w-[93vw] lg:w-[90vw] overflow-auto max-h-[calc(100vh-12rem)]"
+					class="shadow rounded-lg text-gray-500 bg-white shadow-lg duration-200 dark:bg-groadis-dark dark:text-white w-[92vw] md:w-[93vw] lg:w-[90vw] overflow-auto max-h-[calc(100vh-12rem)]"
 				>
 					<slot
 						name="details"
@@ -92,7 +92,7 @@
 		<tr key="edit" v-if="showEdit">
 			<td colspan="12">
 				<div
-					class="shadow rounded-lg text-gray-500 bg-white shadow-lg duration-200 dark:bg-groadis-dark duration-200 dark:text-white w-[92vw] md:w-[93vw] lg:w-[90vw] overflow-auto max-h-[calc(100vh-12rem)]"
+					class="shadow rounded-lg text-gray-500 bg-white shadow-lg duration-200 dark:bg-groadis-dark dark:text-white w-[92vw] md:w-[93vw] lg:w-[90vw] overflow-auto max-h-[calc(100vh-12rem)]"
 				>
 					<slot
 						name="edit"

@@ -36,19 +36,21 @@
 												<v-table-head-field v-slot="{ searchIsActive, toggleActiveSearch }">
 													<div
 														v-if="searchIsActive && field.isSearcheable"
-														class="form-input flex items-center justify-between p-0 rounded-lg border-gray-400 focus-within:ring-0 focus-within:border-droptra max-w-[250px]"
+														class="form-input flex items-center justify-between p-0 border bg-white border-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm duration-200 dark:bg-gray-800 max-w-max"
 													>
 														<input
 															v-model="searchForm[field.name]"
 															:autofocus="true"
 															type="text"
-															class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm min-w-[50px] text-gray-800 pl-2 py-1 bg-transparent w-11/12"
+															class="bg-transparent border-none focus:ring-0 w-full"
 															:placeholder="field.name + ' is ...'"
 														/>
 														<span
 															class="px-2 cursor-pointer text-gray-800"
 															@click="closeActiveSearch(field.name, toggleActiveSearch)"
-														>x</span>
+														>
+															<i class="lar la-times-circle text-red-300 text-xl"></i>
+														</span>
 													</div>
 													<div v-else class="flex items-center gap-x-2">
 														<span>{{ field.name }}</span>
@@ -98,9 +100,9 @@
 								<td colspan="12">
 									<div class="w-[92vw] lg:w-full overflow-auto max-h-[calc(100vh-12rem)]">
 										<div class="loader p-5 flex justify-center space-x-3">
-											<div class="w-5 h-5 bg-gray-800 rounded-full animate-pulse"></div>
-											<div class="w-5 h-5 bg-gray-800 rounded-full animate-pulse"></div>
-											<div class="w-5 h-5 bg-gray-800 rounded-full animate-pulse"></div>
+											<div class="w-5 h-5 dark:bg-gray-600 bg-gray-400 rounded-full animate-pulse"></div>
+											<div class="w-5 h-5 dark:bg-gray-600 bg-gray-400 rounded-full animate-pulse"></div>
+											<div class="w-5 h-5 dark:bg-gray-600 bg-gray-400 rounded-full animate-pulse"></div>
 										</div>
 									</div>
 								</td>
@@ -206,14 +208,12 @@ th:last-child {
 }
 
 .loader div:first-child {
-	animation-delay: 0.1s;
+	animation-delay: 0.1s !important;
 }
-
 .loader div:nth-child(2) {
-	animation-delay: 0.3s;
+	animation-delay: 0.2s !important;
 }
-
 .loader div:nth-child(3) {
-	animation-delay: 0.6s;
+	animation-delay: 0.3s !important;
 }
 </style>

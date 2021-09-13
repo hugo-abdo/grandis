@@ -6,26 +6,25 @@
 
 		<div class="min-h-screen bg-gray-100 duration-200 dark:bg-groadis-darker">
 			<nav
-				class="bg-white duration-200 dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark"
+				class="bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark"
 			>
 				<!-- Primary Navigation Menu -->
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div class="flex justify-between items-center py-2">
-						<div class="flex">
-							<!-- Logo -->
-							<div class="flex-shrink-0 flex items-center">
-								<Link :href="route('dashboard')">
-									<jet-application-mark :isDark="isDark" />
-								</Link>
-							</div>
+						<div class="flex-shrink-0 flex items-center">
+							<Link :href="route('dashboard')">
+								<jet-application-mark :isDark="isDark" />
+							</Link>
 						</div>
+
 						<div class="flex items-center">
 							<i
 								@click="toggleDark"
-								class="lar la-moon bg-gray-300 rounded-full shadow-md active:shadow-none cursor-pointer py-0.5 px-1 leading-none text-gray-600 text-xl"
+								:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
+								class="cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner"
 							></i>
 
-							<div class="hidden sm:flex sm:items-center sm:ml-6">
+							<div class="hidden sm:flex sm:items-center">
 								<!-- Settings Dropdown -->
 								<div class="ml-3 relative">
 									<jet-dropdown

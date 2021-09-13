@@ -18,7 +18,7 @@ module.exports = {
                     }
                     return `rgb(var(--groadis-color))`;
                 },
-                "groadis-dark": colors.coolGray[700],
+                "groadis-dark": colors.coolGray[800],
                 "groadis-darker": colors.coolGray[900],
                 gray: colors.coolGray,
                 cyan: colors.cyan,

@@ -22,18 +22,16 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'role' => ['required', 'int'],
+            'role' => Rule::when(isset($input['role']), ['required', 'int']),
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
         }
-
-        if (!$user->hasRole($input['role']) && Gate::check('change_user_role')) {
+        if (isset($input['role']) && !$user->hasRole($input['role']) && Gate::check('change_user_role')) {
             $user->syncRoles([$input['role']]);
         }
-
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);

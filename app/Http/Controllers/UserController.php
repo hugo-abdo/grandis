@@ -44,7 +44,6 @@ class UserController extends Controller
     }
     public function update(User $user, Request $request, UpdatesUserProfileInformation $updater)
     {
-        $this->authorize('edit_user');
 
         $updater->update($user, $request->all());
 
