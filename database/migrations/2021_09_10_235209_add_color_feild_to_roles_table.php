@@ -14,7 +14,7 @@ class AddColorFeildToRolesTable extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->string('color');
+            $table->string('color')->default('#ccc');
         });
     }
 
