@@ -5,15 +5,17 @@
 			<!-- input -->
 			<input
 				type="checkbox"
-				:id="`switch-${name}`"
 				class="sr-only"
+				:id="`switch-${name}`"
 				:checked="modelValue"
+				ref="inputeswitch"
 				@change="$emit('update:modelValue', $event.target.value)"
 			/>
+
 			<!-- line -->
-			<div class="line block bg-gray-300 shadow-inner w-9 h-6 rounded-full"></div>
+			<div class="line block bg-gray-100 shadow-inner w-8 h-4 rounded-full"></div>
 			<!-- dot -->
-			<div class="dot absolute left-1 shadow-md top-1 bg-white w-4 h-4 rounded-full transition"></div>
+			<div class="dot absolute left-1 shadow-md top-0.5 bg-white w-3 h-3 rounded-full transition"></div>
 		</div>
 	</label>
 </template>
@@ -31,3 +33,14 @@ export default defineComponent({
 	},
 });
 </script>
+<style scoped>
+input ~ .line {
+	@apply bg-red-300;
+}
+input:checked ~ .line {
+	@apply bg-green-300;
+}
+input:checked ~ .dot {
+	transform: translateX(110%);
+}
+</style>

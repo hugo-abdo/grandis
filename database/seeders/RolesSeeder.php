@@ -18,13 +18,8 @@ class RolesSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         //
 
-        $admin = Role::create(['name' => 'admin']);
-
-        $admin->syncPermissions(Permission::all());
-
         Role::create(['name' => 'team']);
         Role::create(['name' => 'client']);
         Role::create(['name' => 'courier']);
-
     }
 }

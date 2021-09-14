@@ -31,7 +31,7 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'is_active'])->group(function () {
     // user routes
     Route::delete('/users/deleteAll', [UserController::class, 'deleteAll'])->name('users.deleteAll');
     Route::delete('/users/{user}/deletePhoto', [UserController::class, 'destroyPhoto'])->name('user-photo.destroy');

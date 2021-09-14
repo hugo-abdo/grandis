@@ -33,22 +33,23 @@
 
 				<!-- Name -->
 				<div class="w-72 mt-5 mx-auto">
-					<jet-input
-						id="name"
-						type="text"
-						placeholder="Role Name"
-						class="mt-1 block w-full"
-						v-model="form.name"
-						autocomplete="name"
-					/>
-					<jet-input-error :message="form.errors.name" class="mt-2" />
-				</div>
-				<!-- Color -->
-				<div class="w-72 mt-2 mx-auto">
-					<div class="flex items-center font-semibold">
-						<label for="color">Role Color</label>
-						<jet-input id="color" type="color" class="w-20 ml-2" v-model="form.color" />
+					<div class="flex items-center">
+						<jet-input
+							id="name"
+							type="text"
+							placeholder="Role Name"
+							class="mt-1 block w-full"
+							v-model="form.name"
+							autocomplete="name"
+						/>
+						<jet-input
+							id="color"
+							type="color"
+							class="w-12 h-10 ml-2 cursor-pointer"
+							v-model="form.color"
+						/>
 					</div>
+					<jet-input-error :message="form.errors.name" class="mt-2" />
 					<jet-input-error :message="form.errors.color" class="mt-2" />
 				</div>
 
@@ -59,26 +60,50 @@
 					<jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">update</jet-button>
 				</div>
 			</card>
-			<card class="col-span-12 md:col-span-6 lg:col-span-8">
-				<ul class="flex flex-wrap gap-3">
-					<li v-for="permission in permissions" :key="permission.id">
-						<badge
-							@click="()=> $refs[`${permission.name}-chekbox`].click()"
-							:class="[
-								'text-lg text-white font-medium cursor-pointer',
-								form.permissions.includes(permission.id) ? 'bg-groadis' : 'bg-gray-400'
-							]"
-							:text="permission.name"
-						>
+			<card class="col-span-12 md:col-span-6 lg:col-span-8 text-gray-700">
+				<h2 class="font-medium text-gray-900">Permissions :</h2>
+				<ul class="grid grid-cols-12 gap-5 mt-2">
+					<template v-for="permission in permissions" :key="permission.id">
+						<li class="col-span-6 sm:col-span-4 md:col-span-6 flex justify-between items-center group">
+							<label
+								:for="`${permission.id}-checkbox`"
+								class="cursor-pointer capitalize min-w-max"
+							>{{permission.name.replaceAll('_',' ',) }}</label>
+							<label
+								:for="`${permission.id}-checkbox`"
+								class="cursor-pointer border-b-4 border-dashed w-full mx-2 group-hover:border-groadis"
+							></label>
 							<input
-								type="checkbox"
-								class="hidden"
-								v-model="form.permissions"
+								class="focus:ring-0 text-groadis"
+								:id="`${permission.id}-checkbox`"
 								:value="permission.id"
-								:ref="`${permission.name}-chekbox`"
+								v-model="form.permissions"
+								type="checkbox"
 							/>
-						</badge>
-					</li>
+						</li>
+					</template>
+				</ul>
+				<h2 class="font-medium text-gray-900 mt-4">User Can See this roles :</h2>
+				<ul class="grid grid-cols-12 gap-5 mt-2">
+					<template v-for="role in roles" :key="role.id">
+						<li class="col-span-6 sm:col-span-4 md:col-span-6 flex justify-between items-center group">
+							<label
+								:for="`${role.id}-role-checkbox`"
+								class="cursor-pointer capitalize min-w-max"
+							>{{role.name.replaceAll('_',' ',) }}</label>
+							<label
+								:for="`${role.id}-role-checkbox`"
+								class="cursor-pointer border-b-4 border-dashed w-full mx-2 group-hover:border-groadis"
+							></label>
+							<input
+								class="focus:ring-0 text-groadis"
+								:id="`${role.id}-role-checkbox`"
+								:value="role.id"
+								v-model="form.roles"
+								type="checkbox"
+							/>
+						</li>
+					</template>
 				</ul>
 			</card>
 		</form>
@@ -94,6 +119,7 @@ import JetLabel from "@/Jetstream/Label.vue";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import JetActionMessage from "@/Jetstream/ActionMessage.vue";
 import Badge from "../../components/badge.vue";
+import InputSwitch from "../../components/InputSwitch.vue";
 
 export default defineComponent({
 	components: {
@@ -104,8 +130,9 @@ export default defineComponent({
 		JetLabel,
 		JetSecondaryButton,
 		Badge,
+		InputSwitch,
 	},
-	props: ["role", "permissions"],
+	props: ["role", "permissions", "roles"],
 	data() {
 		return {
 			form: this.$inertia.form({
@@ -113,6 +140,7 @@ export default defineComponent({
 				color: this.role.color,
 				photo: null,
 				permissions: [],
+				roles: [],
 			}),
 			photoPreview: null,
 		};
@@ -121,10 +149,11 @@ export default defineComponent({
 		this.role.permissions.forEach((permission, index) => {
 			this.form.permissions[index] = permission.id;
 		});
+		this.role.can_see.forEach((role, index) => {
+			this.form.roles[index] = role.id;
+		});
 	},
 	methods: {
-		is_checked(refName) {},
-
 		updateRole() {
 			if (this.$refs.photo) {
 				this.form.photo = this.$refs.photo.files[0];

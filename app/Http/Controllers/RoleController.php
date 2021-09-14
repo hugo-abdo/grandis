@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role as ModelsRole;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -75,16 +76,19 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(ModelsRole $role)
     {
         $this->authorize('edit_role');
         $permissions = Permission::all();
+        $roles = Role::all();
 
         $role->permissions = $role->permissions;
+        $role->can_see = $role->canSee;
 
         return Inertia::render('Roles/Edit', [
             'role' => $role,
             "permissions" => $permissions,
+            "roles" => $roles,
         ]);
     }
 
@@ -95,13 +99,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, ModelsRole $role)
     {
         $this->authorize('edit_role');
         $data = $request->validate([
             'name' => ['required', 'string', Rule::unique('roles')->ignore($role->id)],
             'color' => ['required', 'string'],
             'permissions' => ['array'],
+            'roles' => ['array'],
             'photo' => Rule::when($request->hasFile('photo'), ['image', 'mimes:png', 'max:1000']),
         ]);
         $data['name'] = str_replace(" ", '-', $data['name']);
@@ -113,6 +118,8 @@ class RoleController extends Controller
         }
 
         $role->syncPermissions($data['permissions']);
+
+        $role->canSee()->sync($data['roles']);
 
         $role->update([
             'name' => $data['name'],

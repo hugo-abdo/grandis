@@ -113,10 +113,3 @@
     opacity: 1;
     transition: opacity 0.15s;
 }
-
-input:checked ~ .line {
-    background-color: #48bb78;
-}
-input:checked ~ .dot {
-    transform: translateX(80%);
-}

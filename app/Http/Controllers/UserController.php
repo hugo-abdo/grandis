@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $this->authorize('show_user');
 
-        $model_query = User::query()->with('roles')->orderByDesc('id')->filter();
+        $model_query = User::query()->with('roles')->canSee()->orderByDesc('id')->filter();
 
         return inertiaPro('Users/Index', [
             'users' => function () use ($model_query) {

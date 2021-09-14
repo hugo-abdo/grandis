@@ -40,7 +40,7 @@
 			</action-button>
 		</Actions>
 		<!-- filter -->
-		<card class="px-0 py-1 inline-flex">
+		<card class="px-0 py-1 ml-5 inline-flex">
 			<input-select
 				@change="$store.dispatch('getUsersWithFilter',filterData)"
 				v-model="filterData.status"

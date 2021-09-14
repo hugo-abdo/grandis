@@ -1,16 +1,16 @@
 <template>
-	<div class="antialiased">
+	<div class="antialiased box-border">
 		<Head :title="title" />
 
 		<jet-banner />
 
 		<div class="min-h-screen bg-gray-100 duration-200 dark:bg-groadis-darker">
 			<nav
-				class="bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark"
+				class="fixed inset-x-0 z-50 bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark"
 			>
 				<!-- Primary Navigation Menu -->
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div class="flex justify-between items-center py-2">
+					<div class="flex justify-between items-center py-2.5">
 						<div class="flex-shrink-0 flex items-center">
 							<Link :href="route('dashboard')">
 								<jet-application-mark :isDark="isDark" />
@@ -220,12 +220,17 @@
 					</div>
 				</div>
 			</nav>
-			<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-3 hidden sm:block" v-if="links.length">
-				<navbar :links="links" />
+			<nav
+				v-if="links.length"
+				class="fixed z-40 top-14 inset-x-0 pt-3 bg-gray-100 dark:bg-groadis-darker"
+			>
+				<div class="px-4 sm:px-6 lg:px-8 hidden sm:block">
+					<navbar :links="links" />
+				</div>
 			</nav>
 
 			<!-- Page Content -->
-			<main class="py-12">
+			<main class="pt-[7.5rem] pb-5">
 				<div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 					<slot></slot>
 				</div>
