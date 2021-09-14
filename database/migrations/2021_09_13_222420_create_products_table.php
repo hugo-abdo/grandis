@@ -15,9 +15,9 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->forinId('user_id');
+            $table->foreignId('user_id');
             $table->string('name');
-            $table->string('');
+            $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }

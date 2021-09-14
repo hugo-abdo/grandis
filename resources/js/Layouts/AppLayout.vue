@@ -21,7 +21,7 @@
 							<i
 								@click="toggleDark"
 								:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
-								class="cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner"
+								class="hidden sm:block cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner"
 							></i>
 
 							<div class="hidden sm:flex sm:items-center">
@@ -91,6 +91,11 @@
 
 						<!-- Hamburger -->
 						<div class="-mr-2 flex items-center sm:hidden">
+							<i
+								@click="toggleDark"
+								:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
+								class="cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner mr-2"
+							></i>
 							<button
 								@click="showingNavigationDropdown = ! showingNavigationDropdown"
 								class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"

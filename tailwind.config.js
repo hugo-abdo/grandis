@@ -21,6 +21,7 @@ module.exports = {
                 "groadis-dark": colors.coolGray[800],
                 "groadis-darker": colors.coolGray[900],
                 gray: colors.coolGray,
+                coolGray: colors.gray,
                 cyan: colors.cyan,
                 fuchsia: colors.fuchsia,
                 lightBlue: colors.lightBlue,

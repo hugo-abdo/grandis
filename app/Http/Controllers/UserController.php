@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Laravel\Fortify\Rules\Password;
 use Spatie\Permission\Models\Role;
@@ -22,7 +21,7 @@ class UserController extends Controller
 
         $model_query = User::query()->with('roles')->orderByDesc('id')->filter();
 
-        return Inertia::render('Users/Index', [
+        return inertiaPro('Users/Index', [
             'users' => function () use ($model_query) {
                 return UserResource::collection($model_query->paginate(10)->withQueryString());
             },
@@ -39,7 +38,7 @@ class UserController extends Controller
     {
         $this->authorize('edit_user');
         $roles = Role::orderBy('id', "desc")->get();
-        return Inertia::render('Users/Edit', [
+        return inertiaPro('Users/Edit', [
             'oldUser' => function () use ($user) {
                 return collect(new UserResource($user));
             },
@@ -64,7 +63,7 @@ class UserController extends Controller
     {
         $this->authorize('create_user');
         $roles = Role::orderBy('id', "desc")->get();
-        return Inertia::render('Users/Create', [
+        return inertiaPro('Users/Create', [
             'roles' => $roles,
         ]);
     }
@@ -149,7 +148,7 @@ class UserController extends Controller
         $request->session()->flash('flash.banner', $user->name . ' is ' . $msg . ' Now');
         $request->session()->flash('flash.bannerStyle', $user->is_active ? 'success' : 'danger');
 
-        return Inertia::render('Users/Index', [
+        return inertiaPro('Users/Index', [
             'newUser' => (new UserResource($user))->toArray($request),
         ], '/users');
     }
@@ -169,6 +168,6 @@ class UserController extends Controller
             $user->save();
         });
 
-        return Inertia::render('Users/Index', [], '/users');
+        return inertiaPro('Users/Index', [], '/users');
     }
 }
