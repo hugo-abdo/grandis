@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create()->each(function ($user) {
+        User::factory(100)->create()->each(function ($user) {
             $user->assignRole(Role::findById(random_int(2, 4)));
         });
     }

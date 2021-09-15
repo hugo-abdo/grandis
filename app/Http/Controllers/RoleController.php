@@ -138,10 +138,16 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Role $role, Request $request)
     {
         $this->authorize('delete_role');
+        if ($role->name == 'admin') {
+            $request->session()->flash('flash.banner', 'you can\'t delete the admin');
+            $request->session()->flash('flash.bannerStyle', 'danger');
+            return back(303);
+        }
         $role->delete();
+
         $request->session()->flash('flash.banner', 'role deleted');
         $request->session()->flash('flash.bannerStyle', 'success');
         return back(303);

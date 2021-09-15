@@ -15,12 +15,14 @@ class Response extends InertiaResponse implements Responsable
 {
     protected $url;
 
-    public function __construct($component, $props, $rootView = 'app', $version = null, $url = null)
+    public function __construct($component, $props, $rootView = 'app', $version = null, $url = null) // My update
+
     {
         $this->component = $component;
         $this->props = $props instanceof Arrayable ? $props->toArray() : $props;
         $this->rootView = $rootView;
         $this->version = $version;
+        // My update
         $this->url = $url;
     }
 

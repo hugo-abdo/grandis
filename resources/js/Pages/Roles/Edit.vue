@@ -61,7 +61,7 @@
 				</div>
 			</card>
 			<card class="col-span-12 md:col-span-6 lg:col-span-8 text-gray-700">
-				<h2 class="font-medium text-gray-900">Permissions :</h2>
+				<h2 class="font-medium">Permissions :</h2>
 				<ul class="grid grid-cols-12 gap-5 mt-2">
 					<template v-for="permission in permissions" :key="permission.id">
 						<li class="col-span-6 sm:col-span-4 md:col-span-6 flex justify-between items-center group">
@@ -83,7 +83,7 @@
 						</li>
 					</template>
 				</ul>
-				<h2 class="font-medium text-gray-900 mt-4">User Can See this roles :</h2>
+				<h2 class="font-medium mt-4">User Can See this roles :</h2>
 				<ul class="grid grid-cols-12 gap-5 mt-2">
 					<template v-for="role in roles" :key="role.id">
 						<li class="col-span-6 sm:col-span-4 md:col-span-6 flex justify-between items-center group">

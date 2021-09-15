@@ -8,7 +8,8 @@ use Inertia\ResponseFactory as InertiaResponseFactory;
 
 class ResponseFactory extends InertiaResponseFactory
 {
-    public function render($component, $props = [], $backToUrl = null)
+    public function render($component, $props = [], $backToUrl = null) // My update
+
     {
         if ($props instanceof Arrayable) {
             $props = $props->toArray();
@@ -19,6 +20,7 @@ class ResponseFactory extends InertiaResponseFactory
             array_merge($this->sharedProps, $props),
             $this->rootView,
             $this->getVersion(),
+            // My update
             $backToUrl
         );
     }

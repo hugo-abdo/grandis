@@ -25,7 +25,7 @@ class UserController extends Controller
             'users' => function () use ($model_query) {
                 return UserResource::collection($model_query->paginate(10)->withQueryString());
             },
-            'roles' => Role::all(),
+            'roles' => auth()->user()->roles->first()->canSee,
             'filter' => [
                 'status' => $request->has('status') ? $request->status : 'all status',
                 'role' => $request->has('role') ? $request->role : 'all roles',
@@ -62,7 +62,7 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('create_user');
-        $roles = Role::orderBy('id', "desc")->get();
+        $roles = auth()->user()->roles->first()->canSee;
         return inertiaPro('Users/Create', [
             'roles' => $roles,
         ]);
