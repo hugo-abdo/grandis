@@ -19,6 +19,7 @@ class IsActiveMiddleware
         if (!$request->user()->is_active) {
             return redirect()->route('dashboard');
         }
+
         return $next($request);
     }
 }

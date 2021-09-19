@@ -12,7 +12,7 @@
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div class="flex justify-between items-center py-2.5">
 						<div class="flex-shrink-0 flex items-center">
-							<Link :href="route('dashboard')">
+							<Link href="/">
 								<jet-application-mark :isDark="isDark" />
 							</Link>
 						</div>
@@ -126,15 +126,8 @@
 					:class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
 					class="sm:hidden"
 				>
-					<div class="pt-2 pb-3 space-y-1">
-						<jet-responsive-nav-link
-							:href="route('dashboard')"
-							:active="route().current('dashboard')"
-						>Dashboard</jet-responsive-nav-link>
-					</div>
-
 					<!-- Responsive Settings Options -->
-					<div class="pt-4 pb-1 border-t border-gray-200">
+					<div class="pt-4 pb-1">
 						<div class="flex items-center px-4">
 							<div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3">
 								<img
@@ -218,6 +211,18 @@
 							</template>
 						</div>
 					</div>
+					<div class="pt-2 pb-3 space-y-1 capitalize border-t border-gray-200">
+						<template v-for="(link,index) in links" :key="index">
+							<jet-responsive-nav-link
+								v-if="link.condition"
+								:href="route(link.pathName)"
+								:active="route().current(link.pathName)"
+							>
+								<i v-if="link.iconClass" :class="[link.iconClass,'text-xl mr-1']"></i>
+								{{link.name}}
+							</jet-responsive-nav-link>
+						</template>
+					</div>
 				</div>
 			</nav>
 			<nav
@@ -230,8 +235,8 @@
 			</nav>
 
 			<!-- Page Content -->
-			<main class="pt-[7.5rem] pb-5">
-				<div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+			<main class="pt-32 pb-5">
+				<div class="max-w-7xl mx-auto px-6 xl:px-0">
 					<slot></slot>
 				</div>
 			</main>
@@ -272,13 +277,6 @@ export default defineComponent({
 		const showingNavigationDropdown = ref(false);
 		const links = [
 			{
-				name: "dashboard",
-				pathName: "dashboard",
-				badge: 9,
-				iconClass: "las la-home",
-				condition: true,
-			},
-			{
 				name: "users",
 				pathName: "users.index",
 				iconClass: "las la-users",
@@ -291,8 +289,8 @@ export default defineComponent({
 				condition: can("show_role"),
 			},
 			{
-				name: "products",
-				pathName: "products.index",
+				name: "shop",
+				pathName: "shop.index",
 				iconClass: "las la-store-alt",
 				condition: can("show_product"),
 			},

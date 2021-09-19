@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,17 +18,8 @@ use Inertia\Inertia;
  */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Welcome');
 });
-
-Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
 
 Route::middleware(['auth', 'is_active'])->group(function () {
     // user routes
@@ -43,5 +33,5 @@ Route::middleware(['auth', 'is_active'])->group(function () {
     Route::resource('roles', RoleController::class);
 
     // products routes
-    Route::resource('products', ProductController::class);
+    Route::resource('shop', ProductController::class);
 });

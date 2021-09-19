@@ -71,6 +71,7 @@ class User extends Authenticatable
         !request()->name ?: $query->where('name', 'LIKE', '%' . request()->name . '%');
         !request()->email ?: $query->where('email', 'LIKE', '%' . request()->email . '%');
     }
+
     public function scopeCanSee($query)
     {
         $query->whereHas('roles', function ($q) {
