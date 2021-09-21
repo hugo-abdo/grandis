@@ -114,6 +114,7 @@ export default {
 		});
 		const createNewUser = function () {
 			form.post(route("users.store"), {
+				preserveState: true,
 				onSuccess(page) {
 					form.reset();
 				},

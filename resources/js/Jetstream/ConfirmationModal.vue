@@ -27,7 +27,7 @@
 			</div>
 		</div>
 
-		<div class="px-6 py-4 bg-gray-100 duration-200 dark:bg-gray-600 text-right">
+		<div class="px-6 py-4 bg-gray-200 duration-200 dark:bg-gray-600 text-right">
 			<slot name="footer"></slot>
 		</div>
 	</modal>

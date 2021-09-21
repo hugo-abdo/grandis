@@ -1,8 +1,5 @@
 <template>
-	<Link
-		:href="href"
-		:class="['inline-flex items-center px-2 text-sm font-medium leading-5 text-gray-500 transition focus:outline-none rounded relative ',classes]"
-	>
+	<Link :href="href" class="inline-flex items-center font-medium focus:outline-none pl-3 py-2">
 		<slot />
 	</Link>
 </template>
@@ -12,17 +9,7 @@ import { defineComponent } from "vue";
 import { Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
-	components: {
-		Link,
-	},
-	props: ["href", "active"],
-
-	computed: {
-		classes() {
-			return this.active
-				? "!text-white shadow-groadis active:shadow-none bg-gradient-to-r from-groadis to-indigo-300"
-				: "hover:text-gray-400 duration-200 dark:hover:text-gray-400 focus:text-gray-700 duration-200 dark:text-white ";
-		},
-	},
+	components: { Link },
+	props: ["href"],
 });
 </script>

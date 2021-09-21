@@ -17,11 +17,15 @@ use Inertia\Inertia;
 |
  */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-});
-
 Route::middleware(['auth', 'is_active'])->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Welcome');
+    });
+
+    Route::get('/read-notifications', function () {
+        auth()->user()->unreadNotifications->each(fn($notification) => $notification->markAsRead());
+        return back();
+    });
     // user routes
     Route::delete('/users/deleteAll', [UserController::class, 'deleteAll'])->name('users.deleteAll');
     Route::delete('/users/{user}/deletePhoto', [UserController::class, 'destroyPhoto'])->name('user-photo.destroy');

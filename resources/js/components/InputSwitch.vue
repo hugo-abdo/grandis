@@ -13,7 +13,7 @@
 			/>
 
 			<!-- line -->
-			<div class="line block bg-gray-100 shadow-inner w-8 h-4 rounded-full"></div>
+			<div class="line block bg-gray-200 shadow-inner w-8 h-4 rounded-full"></div>
 			<!-- dot -->
 			<div class="dot absolute left-1 shadow-md top-0.5 bg-white w-3 h-3 rounded-full transition"></div>
 		</div>

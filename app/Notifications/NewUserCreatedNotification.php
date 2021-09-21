@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -13,15 +12,17 @@ class NewUserCreatedNotification extends Notification
     use Queueable;
 
     public $createdUser;
+    public $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $createdUser)
+    public function __construct($createdUser, $message)
     {
         $this->createdUser = $createdUser;
+        $this->message = $message;
     }
 
     /**
@@ -57,9 +58,7 @@ class NewUserCreatedNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return $this->data();
     }
     /**
      * Get the broadcastable representation of the notification.
@@ -69,8 +68,20 @@ class NewUserCreatedNotification extends Notification
      */
     public function toBroadcast($notifiable)
     {
-        return new BroadcastMessage([
-            'created_user' => $this->createdUser,
-        ]);
+
+        return new BroadcastMessage(
+            array_merge(
+                $this->data(),
+                ['id' => $this->id]
+            )
+        );
+    }
+
+    public function data()
+    {
+        return [
+            'message' => auth()->guest() ? 'created by seeder' : $this->message . auth()->user()->name,
+            'user' => $this->createdUser,
+        ];
     }
 }

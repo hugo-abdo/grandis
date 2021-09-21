@@ -3,5 +3,5 @@ export default function (data) {
     const page = usePage();
     const user = page.props.value.user;
 
-    return user.is_active ? user.can.includes(data) : false;
+    return user && user.is_active ? user.can.includes(data) : false;
 }

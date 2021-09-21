@@ -54,6 +54,13 @@ class HandleInertiaRequests extends Middleware
                     ['two_factor_enabled' => !is_null($request->user()->two_factor_secret)]
                 );
             },
+            'notifications' => function () {
+                if (!auth()->guest()) {
+                    return auth()->user()->notifications()
+                        ->take(10)->orderBy('created_at', 'desc')
+                        ->get(['id', 'data', 'read_at', 'created_at']);
+                }
+            },
         ]);
     }
 }

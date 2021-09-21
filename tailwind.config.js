@@ -33,6 +33,7 @@ module.exports = {
             },
             boxShadow: {
                 groadis: "0 0 6px 1px rgba(var(--groadis-color),.6)",
+                r: "inset 5px 2px 4px 0 rgba(0, 0, 0, 0.06)",
             },
         },
     },
