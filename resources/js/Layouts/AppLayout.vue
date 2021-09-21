@@ -252,7 +252,7 @@ import JetDropdown from "@/Jetstream/Dropdown.vue";
 import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link, usePage } from "@inertiajs/inertia-vue3";
 import Navbar from "../components/Navbar.vue";
 import { useDark, useToggle } from "@vueuse/core";
 import { Inertia } from "@inertiajs/inertia";
@@ -274,6 +274,14 @@ export default defineComponent({
 	},
 
 	setup() {
+		const user = usePage().props.value.user;
+		if (!Echo.connector.channels[`private-App.Models.User.${user.id}`]) {
+			Echo.private(`App.Models.User.${user.id}`).notification(
+				(notification) => {
+					console.log(notification);
+				}
+			);
+		}
 		const showingNavigationDropdown = ref(false);
 		const links = [
 			{

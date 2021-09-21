@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Notifications\NewUserCreatedNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -15,6 +17,15 @@ class User extends Authenticatable
 {
 
     use HasRoles, HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable;
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            // event(new NewUserCreatedEvent($model));
+            Notification::send(User::whereId(1)->get(), new NewUserCreatedNotification($model));
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
