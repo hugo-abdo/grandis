@@ -14,7 +14,7 @@
 						</div>
 
 						<div class="flex items-center space-x-3">
-							<notifications />
+							<notifications class="hidden sm:block" />
 							<i
 								@click="toggleDark"
 								:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
@@ -92,11 +92,12 @@
 						</div>
 
 						<!-- Hamburger -->
-						<div class="-mr-2 flex items-center sm:hidden">
+						<div class="-mr-2 flex items-center sm:hidden space-x-3">
+							<notifications />
 							<i
 								@click="toggleDark"
 								:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
-								class="cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner mr-2"
+								class="cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner"
 							></i>
 							<button
 								@click="showingNavigationDropdown = ! showingNavigationDropdown"

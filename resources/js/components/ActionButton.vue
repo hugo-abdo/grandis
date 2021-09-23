@@ -9,7 +9,7 @@
 	>
 		<button
 			v-show="isActive"
-			class="cursor-pointer inline-block rounded-l-full px-0.5 shadow-md active:shadow-none"
+			class="cursor-pointer rounded-full px-1 leading-none shadow-md hover:shadow-groadis active:shadow-none"
 			v-tooltip="{ content: tooltipMsg }"
 		>
 			<slot />

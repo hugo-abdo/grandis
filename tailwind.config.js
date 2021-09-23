@@ -11,7 +11,7 @@ module.exports = {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                groadis: colors.indigo[300],
+                groadis: colors.indigo[400],
                 "groadis-dark": colors.coolGray[800],
                 "groadis-darker": colors.coolGray[900],
                 gray: colors.coolGray,

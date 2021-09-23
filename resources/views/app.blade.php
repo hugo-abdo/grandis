@@ -13,7 +13,7 @@
         @routes
         <script type="module" src="http://localhost:3000/@vite/client"></script>
     </head>
-    <body class="font-sans antialiased duration-200  scrollbar-thin  scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-roun scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-groadis dark:scrollbar-thumb-groadis-dark">
+    <body class="font-sans antialiased duration-200  scrollbar-thin  scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-groadis dark:scrollbar-thumb-groadis-dark">
         @inertia
 
         @env ('local')

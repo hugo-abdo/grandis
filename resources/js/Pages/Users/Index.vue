@@ -9,7 +9,7 @@
 				tooltipMsg="Add New User"
 			>
 				<Link :href="route('users.create')">
-					<i class="las la-plus-circle text-3xl"></i>
+					<i class="las la-plus-circle text-xl"></i>
 				</Link>
 			</action-button>
 
@@ -24,7 +24,7 @@
 					tooltipMsg="Delete Selection"
 					class="bg-white !text-red-500"
 				>
-					<i class="lar la-trash-alt text-3xl"></i>
+					<i class="lar la-trash-alt text-xl"></i>
 				</action-button>
 			</delete-user>
 
@@ -36,7 +36,7 @@
 				tooltipMsg="this Action is not ready"
 				class="bg-white !text-green-500"
 			>
-				<i class="las la-check-circle text-3xl"></i>
+				<i class="las la-check-circle text-xl"></i>
 			</action-button>
 		</Actions>
 		<!-- filter -->

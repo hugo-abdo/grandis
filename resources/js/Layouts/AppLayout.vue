@@ -30,7 +30,7 @@ export default defineComponent({
 			{
 				name: "users",
 				pathName: "users.index",
-				iconClass: "las la-users",
+				iconClass: "las la-user-friends",
 				condition: can("show_user"),
 				isActive: "users.*",
 			},
