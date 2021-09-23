@@ -5,10 +5,10 @@
 		enter-to-class="transform opacity-100 scale-100 translate-x-0"
 		leave-active-class="transition ease-in duration-100"
 		leave-from-class="transform opacity-100 scale-100 translate-y-0"
-		leave-to-class="transform opacity-0 scale-95 -translate-y-80"
+		leave-to-class="transform opacity-0 scale-95 translate-y-80"
 	>
 		<div
-			class="shadow-md fixed rounded-lg overflow-hidden right-5 top-14 z-50"
+			class="shadow-md fixed rounded-lg overflow-hidden right-5 bottom-5 z-50"
 			v-if="show && message"
 		>
 			<div :class="{ 'bg-green-300': style == 'success', 'bg-red-500': style == 'danger' }">
@@ -117,7 +117,7 @@ export default defineComponent({
 					this.show = false;
 					this.$page.props.jetstream.flash.banner = null;
 					clearTimeout(closeNotification);
-				}, 2000);
+				}, 3000);
 			}
 		},
 	},

@@ -24,11 +24,8 @@ import { Head, Link, usePage } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
 	props: { title: String },
-
 	components: { Head, JetApplicationMark, SideBar },
-
 	setup() {
-		const geatters = "";
 		const links = [
 			{
 				name: "users",

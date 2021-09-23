@@ -14,7 +14,9 @@ export default createStore({
         hasNotificatios: false,
         notifications: [],
     }),
-    actions,
+    getters: {
+        isDark: (state) => state.isDark,
+    },
     mutations: {
         INIT_APP(state) {
             state.Echo = new Echo({
@@ -31,4 +33,5 @@ export default createStore({
         UsersModule,
         RolesModule,
     },
+    actions,
 });

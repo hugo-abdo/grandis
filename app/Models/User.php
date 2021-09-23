@@ -22,12 +22,16 @@ class User extends Authenticatable
     {
         parent::boot();
         static::created(function ($model) {
-            Notification::send(User::whereId(1)->get(), new NewUserCreatedNotification($model->only('name', 'id'), 'new user created by '));
+            Notification::send(
+                User::whereId(1)->get(),
+                new NewUserCreatedNotification($model->only('name', 'id'), 'new user created by ' . auth()->user()->name)
+            );
         });
         static::updated(function ($model) {
             Notification::send(
                 User::whereId(1)->get(),
-                new NewUserCreatedNotification($model->only('name', 'id'), $model->name . 'was updated by '));
+                new NewUserCreatedNotification($model->only('name', 'id'), $model->name . ' was updated by ' . auth()->user()->name)
+            );
         });
     }
 

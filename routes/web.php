@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -22,10 +23,10 @@ Route::middleware(['auth', 'is_active'])->group(function () {
         return Inertia::render('Welcome');
     });
 
-    Route::get('/read-notifications', function () {
-        auth()->user()->unreadNotifications->each(fn($notification) => $notification->markAsRead());
+    Route::get('/read-notifications/{notification}', function (DatabaseNotification $notification) {
+        $notification->markAsRead();
         return back();
-    });
+    })->name('readNotification');
     // user routes
     Route::delete('/users/deleteAll', [UserController::class, 'deleteAll'])->name('users.deleteAll');
     Route::delete('/users/{user}/deletePhoto', [UserController::class, 'destroyPhoto'])->name('user-photo.destroy');

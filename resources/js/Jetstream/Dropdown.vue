@@ -5,7 +5,7 @@
 		</div>
 
 		<!-- Full Screen Dropdown Overlay -->
-		<div v-show="open" class="fixed inset-0 z-[100]" @click="open = false"></div>
+		<div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
 
 		<transition
 			enter-active-class="transition ease-out duration-200"
@@ -17,12 +17,11 @@
 		>
 			<div
 				v-show="open"
-				class="absolute z-50 mt-2 rounded-md shadow-lg"
+				class="absolute z-50 mt-2 rounded-md"
 				:class="[widthClass, alignmentClasses]"
 				style="display: none;"
-				@click="open = false"
 			>
-				<div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
+				<div class="rounded-md ring-1 ring-black ring-opacity-5 shadow-lg" :class="contentClasses">
 					<slot name="content"></slot>
 				</div>
 			</div>
@@ -72,6 +71,9 @@ export default defineComponent({
 				48: "w-48",
 				52: "w-52",
 				56: "w-56",
+				60: "w-60",
+				64: "w-64",
+				72: "w-72",
 			}[this.width.toString()];
 		},
 

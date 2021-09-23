@@ -1,5 +1,5 @@
 <template>
-	<app-layout title="Users">
+	<app-layout title="Users 🧑🏾‍🤝‍🧑🏻🧑🏻">
 		<!-- add new User -->
 		<Actions>
 			<action-button

@@ -11,12 +11,7 @@ module.exports = {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                groadis: ({ opacityValue }) => {
-                    if (opacityValue !== undefined) {
-                        return `rgba(var(--groadis-color), ${opacityValue})`;
-                    }
-                    return `rgb(var(--groadis-color))`;
-                },
+                groadis: colors.indigo[300],
                 "groadis-dark": colors.coolGray[800],
                 "groadis-darker": colors.coolGray[900],
                 gray: colors.coolGray,

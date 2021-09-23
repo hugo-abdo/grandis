@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\CreateNewUser;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Facades\App\Services\NotificationsServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -18,6 +19,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $this->authorize('show_user');
+
+        NotificationsServices::read_page_notifications(User::class);
 
         $model_query = User::query()->with('roles')->canSee()->orderByDesc('id')->filter();
 

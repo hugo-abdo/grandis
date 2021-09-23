@@ -21,7 +21,7 @@ createInertiaApp({
         return app;
     },
     setup({ el, app, props, plugin }) {
-        el.dataset.page = "";
+        el.dataset.page = "page";
         Store.commit("INIT_APP");
         return createApp({ render: () => h(app, props) })
             .use(plugin)
