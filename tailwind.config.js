@@ -3,14 +3,13 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
     mode: "jit",
-    purge: ["./resources/**/*.{js,vue}"],
+    purge: ["./resources/**/*.{js,vue,php}"],
     darkMode: "class",
     theme: {
         extend: {
             fontFamily: {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
-
             colors: {
                 groadis: ({ opacityValue }) => {
                     if (opacityValue !== undefined) {
@@ -37,9 +36,12 @@ module.exports = {
             },
         },
     },
-
+    variants: {
+        scrollbar: ["rounded", "dark"],
+    },
     plugins: [
         require("@tailwindcss/forms"),
         require("@tailwindcss/typography"),
+        require("@windicss/plugin-scrollbar"),
     ],
 };

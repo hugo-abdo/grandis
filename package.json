@@ -17,16 +17,18 @@
         "v-tooltip": "https://github.com/paulshen/v-tooltip.git#vue3",
         "vue": "^3.2.6",
         "vue-router": "^4.0.11",
-        "vuex": "^4.0.2"
+        "vuex": "^4.0.2",
+        "windicss": "^3.1.7"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.10.0",
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@inertiajs/progress": "^0.2.6",
-        "@vitejs/plugin-vue": "^1.6.0",
-        "@vue/compiler-sfc": "^3.2.6",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
+        "@vitejs/plugin-vue": "^1.6.0",
+        "@vue/compiler-sfc": "^3.2.6",
+        "@windicss/plugin-scrollbar": "^1.2.3",
         "autoprefixer": "^10.3.4",
         "postcss": "^8.3.6",
         "tailwindcss": "^2.2.9",

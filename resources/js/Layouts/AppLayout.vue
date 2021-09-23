@@ -6,7 +6,7 @@
 	<main
 		:class="[
 				'pt-32 pb-5 duration-200 mx-4',
-				$store.state.sideBarActive ? 'sm:ml-56': 'sm:ml-14'
+				$store.state.sideBarActive ? 'sm:ml-[13.5rem]': 'sm:ml-14'
 			]"
 	>
 		<div class="max-w-7xl mx-auto">
@@ -28,24 +28,28 @@ export default defineComponent({
 	components: { Head, JetApplicationMark, SideBar },
 
 	setup() {
+		const geatters = "";
 		const links = [
 			{
 				name: "users",
 				pathName: "users.index",
 				iconClass: "las la-users",
 				condition: can("show_user"),
+				isActive: "users.*",
 			},
 			{
 				name: "roles",
 				pathName: "roles.index",
 				iconClass: "las la-user-shield",
 				condition: can("show_role"),
+				isActive: "roles.*",
 			},
 			{
 				name: "shop",
 				pathName: "shop.index",
 				iconClass: "las la-store-alt",
 				condition: can("show_product"),
+				isActive: "shop.*",
 			},
 		];
 		return { links };

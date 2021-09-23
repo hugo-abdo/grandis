@@ -30,7 +30,7 @@
 							{'!bg-red-400':!notification.read_at}
 						]"
 							></span>
-							<span class="block">{{notification.data.message}}</span>
+							<span class="block text-shadow-sm">{{notification.data.message}}</span>
 						</div>
 					</template>
 				</template>

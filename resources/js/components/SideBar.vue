@@ -4,16 +4,16 @@
 		@mouseenter="$store.state.sideBarActive = true"
 		@mouseleave="$store.state.sideBarActive = false"
 		:class="[
-		'fixed inset-y-0 top-14 duration-200 overflow-hidden z-50 hidden sm:block',
+		'fixed inset-y-0 top-12 duration-200 overflow-hidden z-50 hidden sm:block',
 		$store.state.sideBarActive ? 'w-52': 'w-12'
 	]"
 	>
-		<div class="pl-2 bg-white duration-200 h-full shadow-md dark:bg-groadis-dark" ref="container">
+		<div class="pl-1 bg-white duration-200 h-full shadow-md dark:bg-groadis-dark">
 			<template v-for="link in links" :key="link.name">
-				<side-bar-link v-if="link.condition" :active="route().current(link.pathName)">
+				<side-bar-link v-if="link.condition" :active="route().current(link.isActive)">
 					<jet-nav-link :href="route(link.pathName)" class="capitalize group">
 						<i :class="link.iconClass" class="text-xl mr-2"></i>
-						<span class="group-hover:ml-2 duration-200">{{link.name}}</span>
+						<span class="group-hover:ml-4 ml-2 duration-200">{{link.name}}</span>
 					</jet-nav-link>
 				</side-bar-link>
 			</template>
