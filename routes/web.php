@@ -20,8 +20,8 @@ use Inertia\Inertia;
 
 Route::middleware(['auth', 'is_active'])->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Welcome');
-    });
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
     Route::get('/read-notifications/{notification}', function (DatabaseNotification $notification) {
         $notification->markAsRead();

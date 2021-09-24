@@ -22,7 +22,7 @@ createInertiaApp({
             );
         }
         return importPage().then(({ default: page }) => {
-            page.layout = page.layout || AppLayout;
+            page.layout = page.layout || h(AppLayout, { title: page.name });
             return page;
         });
     },

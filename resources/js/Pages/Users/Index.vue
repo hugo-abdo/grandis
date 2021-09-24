@@ -32,7 +32,7 @@
 			@click="$store.dispatch('changeAllUsersStatus')"
 			v-if="can('edit_user_status')"
 			:isActive="$store.state.UsersModule.selectedUsers.length"
-			tooltipMsg="this Action is not ready"
+			tooltipMsg="change status"
 			class="bg-white !text-green-500"
 		>
 			<i class="las la-check-circle text-xl"></i>
@@ -145,6 +145,7 @@ import InputSelect from "@/components/InputSelect.vue";
 
 export default defineComponent({
 	props: ["users", "filter", "roles"],
+	name: "test users name",
 	components: {
 		Link,
 		VTable,

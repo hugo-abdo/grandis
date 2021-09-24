@@ -235,7 +235,7 @@
 			<!-- Page Content -->
 			<main
 				:class="[
-				'pt-32 pb-5 px-4 duration-200 overflow-x-auto ',
+				'pt-20 pb-5 px-4 duration-200 overflow-x-auto ',
 				$store.state.sideBarActive ? 'sm:pl-[13.5rem]': 'sm:pl-14'
 			]"
 			>
@@ -265,6 +265,7 @@ import Notifications from "../components/Notifications.vue";
 
 export default defineComponent({
 	props: { title: String },
+	inheritAttrs: false,
 
 	components: {
 		Head,
@@ -285,6 +286,13 @@ export default defineComponent({
 
 		const showingNavigationDropdown = ref(true);
 		const links = [
+			{
+				name: "dashboard",
+				pathName: "dashboard",
+				iconClass: "las la-tachometer-alt",
+				condition: can(""),
+				isActive: "dashboard",
+			},
 			{
 				name: "users",
 				pathName: "users.index",
