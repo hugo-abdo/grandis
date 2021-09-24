@@ -1,7 +1,5 @@
 <template>
-	<app-layout title="Dashboard">
-		<h1>Dashboard</h1>
-	</app-layout>
+	<h1>Dashboard</h1>
 </template>
 
 <script>

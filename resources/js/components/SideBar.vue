@@ -4,12 +4,16 @@
 		@mouseenter="$store.state.sideBarActive = true"
 		@mouseleave="$store.state.sideBarActive = false"
 		:class="[
-		'fixed inset-y-0 top-12 duration-200 overflow-hidden z-50 hidden sm:block',
+		'fixed inset-y-0 duration-200 z-50 hidden sm:block  overflow-hidden',
 		$store.state.sideBarActive ? 'w-52': 'w-12'
 	]"
 	>
-		<div class="pl-1 bg-white duration-200 h-full shadow-md dark:bg-groadis-dark">
-			<template v-for="link in links" :key="link.name">
+		<div class="pl-1 relative bg-white duration-200 shadow-md h-full dark:bg-groadis-dark">
+			<div class="p-3">
+				<jet-application-mark />
+			</div>
+
+			<template v-for="link in links">
 				<side-bar-link v-if="link.condition" :active="route().current(link.isActive)">
 					<jet-nav-link :href="route(link.pathName)" class="capitalize group">
 						<i :class="link.iconClass" class="text-xl mr-2"></i>
@@ -31,7 +35,7 @@ import { useDark } from "@vueuse/core";
 import SideBarLink from "./SideBarLink.vue";
 
 export default {
-	props: { links: Array },
+	props: ["links"],
 	components: {
 		JetNavLink,
 		JetDropdown,

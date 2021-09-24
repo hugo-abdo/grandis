@@ -8,24 +8,27 @@
 		<template #trigger>
 			<span
 				v-if="$store.state.hasNotificatios"
-				class="bg-red-400 w-1.5 h-1.5 absolute shadow-md top-0 right-1 rounded-full animate-bounce"
-			></span>
-			<i class="lar la-bell text-xl text-gray-400 mr-2 cursor-pointer"></i>
+				class="bg-red-400 leading-none text-xs px-1 pb-0.5 text-white absolute shadow-md top-0 right-0 rounded-full animate-bounce"
+			>{{notificationsCount}}</span>
+			<i
+				@click="$store.state.hasNotificatios = false"
+				class="lar la-bell text-xl text-gray-400 mr-2 cursor-pointer"
+			></i>
 		</template>
 
 		<template #content>
 			<div
-				class="select-none text-base max-h-52 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-roun scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-groadis dark:scrollbar-thumb-groadis-dark space-y-1 divide-y-2 p-2 pr-3"
+				class="select-none max-h-[calc(100vh/2)] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-roun scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-groadis dark:scrollbar-thumb-groadis-dark space-y-2 p-2 pr-3"
 			>
 				<template v-for="(notification, index) in $store.state.notifications">
 					<template v-if="index < 10">
 						<div
 							:class="[
-								'relative p-1 px-2 text-gray-400 dark:text-gray-200 capitalize flex justify-between items-center dark:hover:bg-gray-700 hover:bg-gray-200 hover:rounded-lg',
-								{'bg-gray-200 dark:bg-gray-700 rounded-lg':!notification.read_at}
+								'relative p-1 px-2 text-gray-400 dark:text-gray-200 capitalize flex justify-between items-center duration-200 hover:shadow-md dark:hover:bg-gray-700 hover:bg-gray-200 hover:rounded-lg border-l-4',
+								{'bg-gray-200 dark:bg-gray-700 rounded-lg border-red-400':!notification.read_at}
 							]"
 						>
-							<span class="text-shadow-sm">{{notification.data.message}}</span>
+							<span class="text-sm">{{notification.data.message}}</span>
 							<span
 								@click="readNotification(notification)"
 								:class="[
@@ -43,7 +46,7 @@
 
 <script>
 import JetDropdown from "@/Jetstream/Dropdown.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { usePage } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
@@ -55,10 +58,22 @@ export default {
 	setup() {
 		const page = usePage().props.value;
 		const user = ref(page.user).value;
+
 		if (user) {
 			const { state } = useStore();
 
-			state.notifications.unshift(...page.notifications);
+			state.notifications = page.notifications;
+
+			const notificationsCount = computed(() => {
+				return state.notifications.filter((n) => !n.read_at).length;
+			});
+
+			Array.from(state.notifications).map((n) => {
+				// check if ther is new notifications to see
+				if (!n.read_at) {
+					state.hasNotificatios = true;
+				}
+			});
 
 			if (
 				!state.Echo.connector.channels[`private-App.Models.User.${user.id}`]
@@ -96,7 +111,7 @@ export default {
 				}
 			}
 
-			return { readNotification };
+			return { readNotification, notificationsCount };
 		}
 	},
 };

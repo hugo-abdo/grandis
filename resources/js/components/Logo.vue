@@ -2,7 +2,7 @@
 	<div>
 		<Link href="/">
 			<img
-				:srcset="$store.state.isDark ?'/assets/images/logo-light.png':'/assets/images/logo-dark.png'"
+				:src="$store.state.isDark ?'/assets/images/logo-light.png':'/assets/images/logo-dark.png'"
 				class="w-full duration-200"
 				alt="groadis logo"
 			/>

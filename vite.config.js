@@ -1,25 +1,46 @@
 /** @format */
-import path from "path";
 import vue from "@vitejs/plugin-vue";
+const { resolve } = require("path");
+const Dotenv = require("dotenv");
+
+Dotenv.config();
+
+const ASSET_URL = process.env.ASSET_URL || "";
 
 export default ({ command }) => ({
-    base: command === "serve" ? "" : "/vandor/",
-    publicDir: "fake_dir",
+    plugins: [vue()],
+
+    root: "resources",
+    base: command === "build" ? `${ASSET_URL}/dist` : `${ASSET_URL}/`,
+
     build: {
-        outDir: "public/vandor",
+        outDir: resolve(__dirname, "public/dist"),
+        emptyOutDir: true,
+        manifest: true,
+        target: "es2018",
         rollupOptions: {
-            input: ["./resources/js/app.js", "./resources/css/app.css"],
+            input: "/js/app.js",
         },
-        polyfillDynamicImport: false,
     },
+
     resolve: {
         alias: {
-            "@": path.resolve(__dirname, "./resources/js/"),
-            "@components": path.resolve(
-                __dirname,
-                "./resources/js/components/"
-            ),
+            "@": resolve(__dirname, "./resources/js/"),
+            "@components": resolve(__dirname, "./resources/js/components/"),
         },
     },
-    plugins: [vue()],
+
+    optimizeDeps: {
+        include: [
+            "vue",
+            "@inertiajs/inertia",
+            "@inertiajs/inertia-vue3",
+            "@inertiajs/progress",
+            "axios",
+        ],
+    },
+    server: {
+        strictPort: true,
+        port: 3000,
+    },
 });

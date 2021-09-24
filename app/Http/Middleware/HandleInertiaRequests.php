@@ -57,7 +57,7 @@ class HandleInertiaRequests extends Middleware
             'notifications' => function () {
                 if (!auth()->guest()) {
                     return auth()->user()->notifications()
-                        ->take(40)->orderBy('created_at', 'desc')
+                        ->take(10)->orderBy('created_at', 'desc')
                         ->get(['id', 'data', 'read_at', 'created_at']);
                 }
             },

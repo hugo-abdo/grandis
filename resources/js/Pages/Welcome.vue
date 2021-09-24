@@ -1,8 +1,6 @@
 <template>
-	<app-layout>
-		<Head title="Welcome" />
-		<h1>welcome page</h1>
-	</app-layout>
+	<Head title="Welcome" />
+	<h1>welcome page</h1>
 </template>
 
 <script>

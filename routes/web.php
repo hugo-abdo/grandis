@@ -25,7 +25,6 @@ Route::middleware(['auth', 'is_active'])->group(function () {
 
     Route::get('/read-notifications/{notification}', function (DatabaseNotification $notification) {
         $notification->markAsRead();
-
         return back();
     })->name('readNotification');
     // user routes

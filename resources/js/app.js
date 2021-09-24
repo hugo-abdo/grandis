@@ -1,4 +1,3 @@
-import("./bootstrap");
 import "../css/app.css";
 
 import { createApp, h } from "vue";
@@ -7,18 +6,25 @@ import { InertiaProgress } from "@inertiajs/progress";
 import VTooltip from "v-tooltip";
 import Store from "./Store";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import AppHeader from "@/Layouts/Header.vue";
 import Card from "@/components/Card.vue";
 import can from "./mixins/index";
 
 const appName = document.getElementsByTagName("title")[0]?.innerText || "";
+const pages = import.meta.glob("./Pages/**/*.vue");
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: async (name) => {
-        let app = await import(`./Pages/${name}.vue`);
-        app.default.layout = app.default.layout || AppHeader;
-        return app;
+    resolve: (name) => {
+        const importPage = pages[`./Pages/${name}.vue`];
+        if (!importPage) {
+            throw new Error(
+                `Unknown page ${name}. Is it located under Pages with a .vue extension?`
+            );
+        }
+        return importPage().then(({ default: page }) => {
+            page.layout = page.layout || AppLayout;
+            return page;
+        });
     },
     setup({ el, app, props, plugin }) {
         el.dataset.page = "page";
@@ -27,7 +33,6 @@ createInertiaApp({
             .use(plugin)
             .use(VTooltip)
             .use(Store)
-            .component("app-layout", AppLayout)
             .component("card", Card)
             .mixin({ methods: { route, can } })
             .mount(el);

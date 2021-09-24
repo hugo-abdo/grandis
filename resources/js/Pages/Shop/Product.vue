@@ -4,7 +4,7 @@
 			<img
 				class="w-full h-full object-cover absolute top-0"
 				alt="admin image"
-				src="/storage/products/product-01.jpg"
+				src="http://grandis.test/storage/products/product-01.jpg"
 			/>
 			<span class="absolute inset-0 bg-gradient-to-t from-coolGray-600 via-transparent"></span>
 			<div class="absolute bottom-3 w-full text-white font-semibold px-2">
