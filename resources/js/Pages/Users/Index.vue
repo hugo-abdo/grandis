@@ -8,7 +8,7 @@
 			tooltipMsg="Add New User"
 		>
 			<Link :href="route('users.create')">
-				<i class="las la-plus-circle text-xl"></i>
+			<i class="las la-plus-circle text-xl"></i>
 			</Link>
 		</action-button>
 
@@ -43,7 +43,7 @@
 		<input-select
 			@change="$store.dispatch('getUsersWithFilter',filterData)"
 			v-model="filterData.status"
-			class="border-none focus:ring-0 py-0 shadow-none"
+			class="border-none focus:ring-0 py-0 shadow-none !bg-transparent"
 		>
 			<option value="all status">all status</option>
 			<option value="1">active</option>
@@ -52,10 +52,14 @@
 		<input-select
 			@change="$store.dispatch('getUsersWithFilter',filterData)"
 			v-model="filterData.role"
-			class="border-none focus:ring-0 py-0 shadow-none"
+			class="border-none focus:ring-0 py-0 shadow-none !bg-transparent"
 		>
 			<option value="all roles">all roles</option>
-			<option v-for="role in roles" :value="role.name" :key="role.id">{{role.name}}</option>
+			<option
+				v-for="role in roles"
+				:value="role.name"
+				:key="role.id"
+			>{{role.name}}</option>
 		</input-select>
 	</card>
 	<!-- users table -->
@@ -65,7 +69,7 @@
 		:data="$store.state.UsersModule.data"
 		:fields="$store.state.UsersModule.TableFields"
 		:is_loading="$store.state.UsersModule.is_loading"
-		class="pr-5"
+		class="pr-2 md:pr-0"
 	>
 		<template #cell(avatar)="{row}">
 			<div class="w-max">
@@ -107,7 +111,7 @@
 					class="text-gray-500 cursor-pointer bg-white rounded-md border px-1 shadow active:shadow-none"
 				>
 					<Link :href="route('users.edit',row.id)">
-						<i class="las la-user-edit"></i>
+					<i class="las la-user-edit"></i>
 					</Link>
 				</div>
 				<!-- delete user -->
@@ -116,8 +120,14 @@
 					v-if="row.id !== $page.props.user.id && can('delete_user')"
 					class="text-red-400 bg-white rounded-md border px-1 shadow active:shadow-none"
 				>
-					<delete-user :data="row.id" #="{activate}">
-						<i class="las la-trash cursor-pointer" @click="activate"></i>
+					<delete-user
+						:data="row.id"
+						#="{activate}"
+					>
+						<i
+							class="las la-trash cursor-pointer"
+							@click="activate"
+						></i>
 					</delete-user>
 				</div>
 				<!-- Change user status -->
@@ -145,7 +155,7 @@ import InputSelect from "@/components/InputSelect.vue";
 
 export default defineComponent({
 	props: ["users", "filter", "roles"],
-	name: "test users name",
+	name: "Users 🧑🏻‍🤝‍🧑🏼🧑🏾‍🤝‍🧑🏻",
 	components: {
 		Link,
 		VTable,

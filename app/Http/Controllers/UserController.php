@@ -5,22 +5,29 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\CreateNewUser;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Facades\App\Services\NotificationsServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Laravel\Fortify\Rules\Password;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        Inertia::share([
+            'filter' => [
+                'status' => $request->has('status') ? $request->status : 'all status',
+                'role' => $request->has('role') ? $request->role : 'all roles',
+            ],
+        ]);
+    }
 
     public function index(Request $request)
     {
         $this->authorize('show_user');
-
-        NotificationsServices::read_page_notifications(User::class);
 
         $model_query = User::query()->with('roles')->canSee()->orderByDesc('id')->filter();
 
@@ -29,10 +36,6 @@ class UserController extends Controller
                 return UserResource::collection($model_query->paginate(10)->withQueryString());
             },
             'roles' => auth()->user()->roles->first()->canSee,
-            'filter' => [
-                'status' => $request->has('status') ? $request->status : 'all status',
-                'role' => $request->has('role') ? $request->role : 'all roles',
-            ],
         ], '/users');
     }
 
@@ -40,6 +43,7 @@ class UserController extends Controller
     public function edit(User $user, Request $request)
     {
         $this->authorize('edit_user');
+
         $roles = Role::orderBy('id', "desc")->get();
         return inertiaPro('Users/Edit', [
             'oldUser' => function () use ($user) {
@@ -171,6 +175,6 @@ class UserController extends Controller
             $user->save();
         });
 
-        return inertiaPro('Users/Index', [], '/users');
+        return back(303);
     }
 }

@@ -3,15 +3,21 @@
 	<table class="w-full whitespace-nowrap">
 		<thead>
 			<tr class="duration-200 dark:text-white text-gray-500">
-				<template v-for="(field, index) in fields" :key="index">
-					<th scope="col" class="p-3 text-base font-medium tracking-wider text-left capitalize">
+				<template
+					v-for="(field, index) in fields"
+					:key="index"
+				>
+					<th
+						scope="col"
+						class="p-3 text-base font-medium tracking-wider text-left capitalize"
+					>
 						<slot
 							:name="`head(${field.key})`"
-							:row="{
-												...field,
-												index,
-												value: field.name,
-											}"
+							:row="{	
+								...field,
+								index,
+								value: field.name,
+							}"
 							:toggleSelecteAll="toggleSelecteAll"
 							:itemsSelected="itemsSelected"
 							v-if="$slots[`head(${field.key})`]"
@@ -19,10 +25,10 @@
 						<slot
 							v-else-if="$slots['head()']"
 							:row="{
-												...field,
-												index,
-												value: field.name,
-											}"
+								...field,
+								index,
+								value: field.name,
+							}"
 							:toggleSelecteAll="toggleSelecteAll"
 							:itemsSelected="itemsSelected"
 							:name="`head()`"
@@ -32,13 +38,13 @@
 								<v-table-head-field v-slot="{ searchIsActive, toggleActiveSearch }">
 									<div
 										v-if="searchIsActive && field.isSearcheable"
-										class="form-input flex items-center justify-between p-0 border bg-white border-gray-500 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm duration-200 dark:bg-gray-800 max-w-max"
+										class="flex items-center justify-between p-0 border bg-white focus:border-indigo-300 focus-within:ring-1 focus-within:ring-groadis focus-within:ring-opacity-50 rounded-full shadow duration-200 dark:bg-gray-800 max-w-max"
 									>
 										<input
 											v-model="searchForm[field.name]"
 											:autofocus="true"
 											type="text"
-											class="bg-transparent border-none focus:ring-0 w-full"
+											class="bg-transparent py-0 border-none focus:ring-0 w-full"
 											:placeholder="field.name + ' is ...'"
 										/>
 										<span
@@ -48,7 +54,10 @@
 											<i class="lar la-times-circle text-red-300 text-xl"></i>
 										</span>
 									</div>
-									<div v-else class="flex items-center gap-x-2">
+									<div
+										v-else
+										class="flex items-center gap-x-2"
+									>
 										<span>{{ field.name }}</span>
 										<svg
 											v-if="field.isSearcheable"
@@ -88,11 +97,21 @@
 				:fields="fields"
 				@toggleSelected="toggleSelected"
 			>
-				<template v-for="(index, name) in $slots" v-slot:[name]="data" :key="index">
-					<slot :name="name" v-bind="data" />
+				<template
+					v-for="(index, name) in $slots"
+					v-slot:[name]="data"
+					:key="index"
+				>
+					<slot
+						:name="name"
+						v-bind="data"
+					/>
 				</template>
 			</v-table-row>
-			<tr key="edit" v-if="is_loading">
+			<tr
+				key="edit"
+				v-if="is_loading"
+			>
 				<td colspan="12">
 					<div class="w-[92vw] lg:w-full overflow-auto max-h-[calc(100vh-12rem)]">
 						<div class="loader p-5 flex justify-center space-x-3">

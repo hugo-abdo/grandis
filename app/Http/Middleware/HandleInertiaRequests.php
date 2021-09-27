@@ -48,16 +48,18 @@ class HandleInertiaRequests extends Middleware
                 }
 
                 return array_merge(
-                    ["can" => $request->user()->getAllPermissions()->pluck('name')],
                     $request->user()->toArray(),
-                    array_filter(['all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams() : null]),
-                    ['two_factor_enabled' => !is_null($request->user()->two_factor_secret)]
+                    [
+                        "can" => $request->user()->getAllPermissions()->pluck('name'),
+                        'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams() : null,
+                        'two_factor_enabled' => !is_null($request->user()->two_factor_secret),
+                    ]
                 );
             },
             'notifications' => function () {
                 if (!auth()->guest()) {
                     return auth()->user()->notifications()
-                        ->take(10)->orderBy('created_at', 'desc')
+                        ->take(20)->orderBy('created_at', 'desc')
                         ->get(['id', 'data', 'read_at', 'created_at']);
                 }
             },

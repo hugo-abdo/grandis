@@ -22,7 +22,6 @@ module.exports = {
                 teal: colors.teal,
                 orange: colors.orange,
                 emerald: colors.emerald,
-                sky: colors.sky,
                 lime: colors.lime,
             },
             boxShadow: {

@@ -8,4 +8,5 @@ export default function (data) {
     }
 
     return user && user.is_active ? user.can.includes(data) : false;
+    return true;
 }
