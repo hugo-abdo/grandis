@@ -43,7 +43,7 @@
 		<input-select
 			@change="$store.dispatch('getUsersWithFilter',filterData)"
 			v-model="filterData.status"
-			class="border-none focus:ring-0 py-0 shadow-none !bg-transparent"
+			class="border-none focus:ring-0 py-0 shadow-none  !bg-transparent dark:!bg-groadis-dark"
 		>
 			<option value="all status">all status</option>
 			<option value="1">active</option>
@@ -52,7 +52,7 @@
 		<input-select
 			@change="$store.dispatch('getUsersWithFilter',filterData)"
 			v-model="filterData.role"
-			class="border-none focus:ring-0 py-0 shadow-none !bg-transparent"
+			class="border-none focus:ring-0 py-0 shadow-none !bg-transparent dark:!bg-groadis-dark"
 		>
 			<option value="all roles">all roles</option>
 			<option

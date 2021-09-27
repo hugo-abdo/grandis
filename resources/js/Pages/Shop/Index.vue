@@ -10,62 +10,58 @@
 				>
 				<i class="las la-search px-2 absolute right-0 pointer-events-none"></i>
 			</card>
-			<card class="mt-2">
-				<h2 class>Multi Range :</h2>
-				<div class="flex items-center mt-4">
-					<jet-input
-						type="checkbox"
-						id="range-all"
-					/>
-					<jet-label
-						for="range-all"
-						class="ml-2"
-					>All</jet-label>
-				</div>
-				<div class="flex items-center mt-2">
-					<jet-input
-						type="checkbox"
-						id="range-all"
-					/>
-					<jet-label
-						for="range-all"
-						class="ml-2"
-					>{{'<= $10'}}</jet-label>
-				</div>
-				<div class="flex items-center mt-2">
-					<jet-input
-						type="checkbox"
-						id="range-all"
-					/>
-					<jet-label
-						for="range-all"
-						class="ml-2"
-					>{{'$10 - $100'}}</jet-label>
-				</div>
-				<div class="flex items-center mt-2">
-					<jet-input
-						type="checkbox"
-						id="range-all"
-					/>
-					<jet-label
-						for="range-all"
-						class="ml-2"
-					>{{'$100 - $500'}}</jet-label>
-				</div>
-				<div class="flex items-center mt-2">
-					<jet-input
-						type="checkbox"
-						id="range-all"
-					/>
-					<jet-label
-						for="range-all"
-						class="ml-2"
-					>{{'>= $500'}}</jet-label>
-				</div>
+			<card class="mt-2 space-y-4">
+				<filter-section title="Multi Range :">
+					<div class="flex items-center ">
+						<jet-input
+							type="checkbox"
+							id="range-all"
+						/>
+						<jet-label
+							for="range-all"
+							class="ml-2"
+						>All</jet-label>
+					</div>
+				</filter-section>
+				<filter-section title="Categories :">
+					<div class="flex items-center">
+						<jet-input
+							type="checkbox"
+							id="range-all"
+						/>
+						<jet-label
+							for="range-all"
+							class="ml-2"
+						>All</jet-label>
+					</div>
+				</filter-section>
+				<filter-section title="Brands :">
+					<div class="flex items-center">
+						<jet-input
+							type="checkbox"
+							id="range-all"
+						/>
+						<jet-label
+							for="range-all"
+							class="ml-2"
+						>All</jet-label>
+					</div>
+				</filter-section>
+				<filter-section title="ratings :">
+					<div class="flex items-center">
+						<jet-input
+							type="checkbox"
+							id="range-all"
+						/>
+						<jet-label
+							for="range-all"
+							class="ml-2"
+						>All</jet-label>
+					</div>
+				</filter-section>
 			</card>
 		</div>
 		<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full md:w-3/4">
-
 			<product v-for="i in 12" />
 		</div>
 	</div>
@@ -74,12 +70,14 @@
 <script>
 import JetLabel from "../../Jetstream/Label.vue";
 import JetInput from "../../Jetstream/Input.vue";
-import Product from "./Product.vue";
+import Product from "./Partials/Product.vue";
+import FilterSection from "./Partials/FilterSection.vue";
 export default {
 	components: {
 		Product,
 		JetLabel,
 		JetInput,
+		FilterSection,
 	},
 };
 </script>
