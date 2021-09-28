@@ -2,7 +2,10 @@
 	<slot :activate="confirmUserDeletion" />
 
 	<!-- Delete Account Confirmation Modal -->
-	<jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
+	<jet-dialog-modal
+		:show="confirmingUserDeletion"
+		@close="closeModal"
+	>
 		<template #title>Delete Account</template>
 
 		<template #content>
@@ -17,7 +20,10 @@
 					@keyup.enter="deleteUser"
 				/>
 
-				<jet-input-error :message="form.errors.password" class="mt-2" />
+				<jet-input-error
+					:message="form.errors.password"
+					class="mt-2"
+				/>
 			</div>
 		</template>
 
@@ -36,12 +42,12 @@
 
 <script>
 import { defineComponent } from "vue";
-import JetActionSection from "@/Jetstream/ActionSection.vue";
-import JetDialogModal from "@/Jetstream/DialogModal.vue";
-import JetDangerButton from "@/Jetstream/DangerButton.vue";
-import JetInput from "@/Jetstream/Input.vue";
-import JetInputError from "@/Jetstream/InputError.vue";
-import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
+import JetActionSection from "@/components/ActionSection.vue";
+import JetDialogModal from "@/components/DialogModal.vue";
+import JetDangerButton from "@/components/DangerButton.vue";
+import JetInput from "@/components/Input.vue";
+import JetInputError from "@/components/InputError.vue";
+import JetSecondaryButton from "@/components/SecondaryButton.vue";
 
 export default defineComponent({
 	components: {

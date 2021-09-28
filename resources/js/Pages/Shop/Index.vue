@@ -68,8 +68,8 @@
 </template>
 
 <script>
-import JetLabel from "../../Jetstream/Label.vue";
-import JetInput from "../../Jetstream/Input.vue";
+import JetLabel from "../../components/Label.vue";
+import JetInput from "../../components/Input.vue";
 import Product from "./Partials/Product.vue";
 import FilterSection from "./Partials/FilterSection.vue";
 export default {

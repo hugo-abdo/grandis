@@ -1,81 +1,116 @@
 <template>
-    <Head title="Reset Password" />
 
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+	<Head title="Reset Password" />
 
-        <jet-validation-errors class="mb-4" />
+	<jet-authentication-card>
+		<template #logo>
+			<jet-authentication-card-logo />
+		</template>
 
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
-            </div>
+		<jet-validation-errors class="mb-4" />
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
-            </div>
+		<form @submit.prevent="submit">
+			<div>
+				<jet-label
+					for="email"
+					value="Email"
+				/>
+				<jet-input
+					id="email"
+					type="email"
+					class="mt-1 block w-full"
+					v-model="form.email"
+					required
+					autofocus
+				/>
+			</div>
 
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
+			<div class="mt-4">
+				<jet-label
+					for="password"
+					value="Password"
+				/>
+				<jet-input
+					id="password"
+					type="password"
+					class="mt-1 block w-full"
+					v-model="form.password"
+					required
+					autocomplete="new-password"
+				/>
+			</div>
 
-            <div class="flex items-center justify-end mt-4">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Reset Password
-                </jet-button>
-            </div>
-        </form>
-    </jet-authentication-card>
+			<div class="mt-4">
+				<jet-label
+					for="password_confirmation"
+					value="Confirm Password"
+				/>
+				<jet-input
+					id="password_confirmation"
+					type="password"
+					class="mt-1 block w-full"
+					v-model="form.password_confirmation"
+					required
+					autocomplete="new-password"
+				/>
+			</div>
+
+			<div class="flex items-center justify-end mt-4">
+				<jet-button
+					:class="{ 'opacity-25': form.processing }"
+					:disabled="form.processing"
+				>
+					Reset Password
+				</jet-button>
+			</div>
+		</form>
+	</jet-authentication-card>
 </template>
 
 <script>
-    import { defineComponent } from 'vue';
-    import { Head } from '@inertiajs/inertia-vue3';
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+import { defineComponent } from "vue";
+import { Head } from "@inertiajs/inertia-vue3";
+import JetAuthenticationCard from "@/components/AuthenticationCard.vue";
+import JetAuthenticationCardLogo from "@/components/AuthenticationCardLogo.vue";
+import JetButton from "@/components/Button.vue";
+import JetInput from "@/components/Input.vue";
+import JetLabel from "@/components/Label.vue";
+import JetValidationErrors from "@/components/ValidationErrors.vue";
 
-    export default defineComponent({
-        components: {
-            Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
-        },
+export default defineComponent({
+	components: {
+		Head,
+		JetAuthenticationCard,
+		JetAuthenticationCardLogo,
+		JetButton,
+		JetInput,
+		JetLabel,
+		JetValidationErrors,
+	},
 
-        props: {
-            email: String,
-            token: String,
-        },
+	props: {
+		email: String,
+		token: String,
+	},
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    token: this.token,
-                    email: this.email,
-                    password: '',
-                    password_confirmation: '',
-                })
-            }
-        },
+	data() {
+		return {
+			form: this.$inertia.form({
+				token: this.token,
+				email: this.email,
+				password: "",
+				password_confirmation: "",
+			}),
+		};
+	},
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.update'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
-            }
-        }
-    })
+	methods: {
+		submit() {
+			this.form.post(this.route("password.update"), {
+				onFinish: () =>
+					this.form.reset("password", "password_confirmation"),
+			});
+		},
+	},
+});
 </script>

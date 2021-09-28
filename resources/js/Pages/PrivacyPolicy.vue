@@ -1,4 +1,5 @@
 <template>
+
 	<Head title="Privacy Policy" />
 
 	<div class="font-sans text-gray-900 antialiased">
@@ -20,7 +21,7 @@
 <script>
 import { defineComponent } from "vue";
 import { Head } from "@inertiajs/inertia-vue3";
-import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
+import JetAuthenticationCardLogo from "@/components/AuthenticationCardLogo.vue";
 
 export default defineComponent({
 	props: ["policy"],

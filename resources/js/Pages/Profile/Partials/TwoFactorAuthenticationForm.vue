@@ -22,23 +22,25 @@
 			<div v-if="twoFactorEnabled">
 				<div v-if="qrCode">
 					<div class="mt-4 max-w-xl text-sm duration-200 dark:text-white text-gray-600">
-						<p
-							class="font-semibold"
-						>Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.</p>
+						<p class="font-semibold">Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.</p>
 					</div>
 
-					<div class="mt-4" v-html="qrCode"></div>
+					<div
+						class="mt-4"
+						v-html="qrCode"
+					></div>
 				</div>
 
 				<div v-if="recoveryCodes.length > 0">
 					<div class="mt-4 max-w-xl text-sm duration-200 dark:text-white text-gray-600">
-						<p
-							class="font-semibold"
-						>Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.</p>
+						<p class="font-semibold">Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.</p>
 					</div>
 
 					<div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-200 rounded-lg">
-						<div v-for="code in recoveryCodes" :key="code">{{ code }}</div>
+						<div
+							v-for="code in recoveryCodes"
+							:key="code"
+						>{{ code }}</div>
 					</div>
 				</div>
 			</div>
@@ -46,21 +48,34 @@
 			<div class="mt-5">
 				<div v-if="! twoFactorEnabled">
 					<jet-confirms-password @confirmed="enableTwoFactorAuthentication">
-						<jet-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">Enable</jet-button>
+						<jet-button
+							type="button"
+							:class="{ 'opacity-25': enabling }"
+							:disabled="enabling"
+						>Enable</jet-button>
 					</jet-confirms-password>
 				</div>
 
 				<div v-else>
 					<jet-confirms-password @confirmed="regenerateRecoveryCodes">
-						<jet-secondary-button class="mr-3" v-if="recoveryCodes.length > 0">Regenerate Recovery Codes</jet-secondary-button>
+						<jet-secondary-button
+							class="mr-3"
+							v-if="recoveryCodes.length > 0"
+						>Regenerate Recovery Codes</jet-secondary-button>
 					</jet-confirms-password>
 
 					<jet-confirms-password @confirmed="showRecoveryCodes">
-						<jet-secondary-button class="mr-3" v-if="recoveryCodes.length === 0">Show Recovery Codes</jet-secondary-button>
+						<jet-secondary-button
+							class="mr-3"
+							v-if="recoveryCodes.length === 0"
+						>Show Recovery Codes</jet-secondary-button>
 					</jet-confirms-password>
 
 					<jet-confirms-password @confirmed="disableTwoFactorAuthentication">
-						<jet-danger-button :class="{ 'opacity-25': disabling }" :disabled="disabling">Disable</jet-danger-button>
+						<jet-danger-button
+							:class="{ 'opacity-25': disabling }"
+							:disabled="disabling"
+						>Disable</jet-danger-button>
 					</jet-confirms-password>
 				</div>
 			</div>
@@ -70,11 +85,11 @@
 
 <script>
 import { defineComponent } from "vue";
-import JetActionSection from "@/Jetstream/ActionSection.vue";
-import JetButton from "@/Jetstream/Button.vue";
-import JetConfirmsPassword from "@/Jetstream/ConfirmsPassword.vue";
-import JetDangerButton from "@/Jetstream/DangerButton.vue";
-import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
+import JetActionSection from "@/components/ActionSection.vue";
+import JetButton from "@/components/Button.vue";
+import JetConfirmsPassword from "@/components/ConfirmsPassword.vue";
+import JetDangerButton from "@/components/DangerButton.vue";
+import JetSecondaryButton from "@/components/SecondaryButton.vue";
 
 export default defineComponent({
 	components: {

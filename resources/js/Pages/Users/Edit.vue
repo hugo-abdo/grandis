@@ -6,14 +6,28 @@
 
 		<template #form>
 			<!-- Profile Photo -->
-			<div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
+			<div
+				class="col-span-6 sm:col-span-4"
+				v-if="$page.props.jetstream.managesProfilePhotos"
+			>
 				<!-- Profile Photo File Input -->
-				<input type="file" class="hidden" ref="photo" @change="updatePhotoPreview" />
+				<input
+					type="file"
+					class="hidden"
+					ref="photo"
+					@change="updatePhotoPreview"
+				/>
 
-				<jet-label for="photo" value="Photo" />
+				<jet-label
+					for="photo"
+					value="Photo"
+				/>
 
 				<!-- Current Profile Photo -->
-				<div class="mt-2" v-show="! photoPreview">
+				<div
+					class="mt-2"
+					v-show="! photoPreview"
+				>
 					<img
 						:src="oldUser.profile_photo_url"
 						:alt="oldUser.name"
@@ -22,7 +36,10 @@
 				</div>
 
 				<!-- New Profile Photo Preview -->
-				<div class="mt-2" v-show="photoPreview">
+				<div
+					class="mt-2"
+					v-show="photoPreview"
+				>
 					<span
 						class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
 						:style="'background-image: url(\'' + photoPreview + '\');'"
@@ -42,11 +59,17 @@
 					v-if="oldUser.profile_photo_path"
 				>Remove Photo</jet-secondary-button>
 
-				<jet-input-error :message="form.errors.photo" class="mt-2" />
+				<jet-input-error
+					:message="form.errors.photo"
+					class="mt-2"
+				/>
 			</div>
 			<!-- Name -->
 			<div class="col-span-6 sm:col-span-4">
-				<jet-label for="name" value="Name" />
+				<jet-label
+					for="name"
+					value="Name"
+				/>
 				<jet-input
 					id="name"
 					type="text"
@@ -54,42 +77,80 @@
 					v-model="form.name"
 					autocomplete="name"
 				/>
-				<jet-input-error :message="form.errors.name" class="mt-2" />
+				<jet-input-error
+					:message="form.errors.name"
+					class="mt-2"
+				/>
 			</div>
 
 			<!-- Email -->
 			<div class="col-span-6 sm:col-span-4">
-				<jet-label for="email" value="Email" />
-				<jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
-				<jet-input-error :message="form.errors.email" class="mt-2" />
+				<jet-label
+					for="email"
+					value="Email"
+				/>
+				<jet-input
+					id="email"
+					type="email"
+					class="mt-1 block w-full"
+					v-model="form.email"
+				/>
+				<jet-input-error
+					:message="form.errors.email"
+					class="mt-2"
+				/>
 			</div>
-			<div class="col-span-8 sm:col-span-4" v-if="can('change_user_role')">
-				<jet-label for="role" value="Role" />
+			<div
+				class="col-span-8 sm:col-span-4"
+				v-if="can('change_user_role')"
+			>
+				<jet-label
+					for="role"
+					value="Role"
+				/>
 
-				<input-select v-model="form.role" id="role" name="role" autocomplete="role">
-					<option v-for="role in roles" :key="role.id" :value="role.id">{{role.name}}</option>
+				<input-select
+					v-model="form.role"
+					id="role"
+					name="role"
+					autocomplete="role"
+				>
+					<option
+						v-for="role in roles"
+						:key="role.id"
+						:value="role.id"
+					>{{role.name}}</option>
 				</input-select>
-				<jet-input-error :message="form.errors.role" class="mt-2" />
+				<jet-input-error
+					:message="form.errors.role"
+					class="mt-2"
+				/>
 			</div>
 		</template>
 
 		<template #actions>
-			<jet-action-message :on="form.recentlySuccessful" class="mr-3">Saved.</jet-action-message>
+			<jet-action-message
+				:on="form.recentlySuccessful"
+				class="mr-3"
+			>Saved.</jet-action-message>
 
-			<jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Save</jet-button>
+			<jet-button
+				:class="{ 'opacity-25': form.processing }"
+				:disabled="form.processing"
+			>Save</jet-button>
 		</template>
 	</jet-form-section>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import JetButton from "@/Jetstream/Button.vue";
-import JetInput from "@/Jetstream/Input.vue";
-import JetInputError from "@/Jetstream/InputError.vue";
-import JetLabel from "@/Jetstream/Label.vue";
-import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
-import JetFormSection from "@/Jetstream/FormSection.vue";
-import JetActionMessage from "@/Jetstream/ActionMessage.vue";
+import JetButton from "@/components/Button.vue";
+import JetInput from "@/components/Input.vue";
+import JetInputError from "@/components/InputError.vue";
+import JetLabel from "@/components/Label.vue";
+import JetSecondaryButton from "@/components/SecondaryButton.vue";
+import JetFormSection from "@/components/FormSection.vue";
+import JetActionMessage from "@/components/ActionMessage.vue";
 import InputSelect from "@/components/InputSelect.vue";
 
 export default defineComponent({

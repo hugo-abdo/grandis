@@ -264,12 +264,12 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import JetApplicationMark from "@/Jetstream/ApplicationMark.vue";
-import JetBanner from "@/Jetstream/Banner.vue";
-import JetDropdown from "@/Jetstream/Dropdown.vue";
-import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
-import JetNavLink from "@/Jetstream/NavLink.vue";
-import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
+import JetApplicationMark from "@/components/ApplicationMark.vue";
+import JetBanner from "@/components/Banner.vue";
+import JetDropdown from "@/components/Dropdown.vue";
+import JetDropdownLink from "@/components/DropdownLink.vue";
+import JetNavLink from "@/components/NavLink.vue";
+import JetResponsiveNavLink from "@/components/ResponsiveNavLink.vue";
 import { Head, Link, usePage } from "@inertiajs/inertia-vue3";
 import { useDark, useToggle } from "@vueuse/core";
 import { Inertia } from "@inertiajs/inertia";

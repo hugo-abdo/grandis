@@ -5,16 +5,17 @@
 		<template #description>Permanently delete your account.</template>
 
 		<template #content>
-			<div
-				class="max-w-xl text-sm duration-200 dark:text-white text-gray-600"
-			>Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.</div>
+			<div class="max-w-xl text-sm duration-200 dark:text-white text-gray-600">Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.</div>
 
 			<div class="mt-5">
 				<jet-danger-button @click="confirmUserDeletion">Delete Account</jet-danger-button>
 			</div>
 
 			<!-- Delete Account Confirmation Modal -->
-			<jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
+			<jet-dialog-modal
+				:show="confirmingUserDeletion"
+				@close="closeModal"
+			>
 				<template #title>Delete Account</template>
 
 				<template #content>
@@ -29,7 +30,10 @@
 							@keyup.enter="deleteUser"
 						/>
 
-						<jet-input-error :message="form.errors.password" class="mt-2" />
+						<jet-input-error
+							:message="form.errors.password"
+							class="mt-2"
+						/>
 					</div>
 				</template>
 
@@ -50,12 +54,12 @@
 
 <script>
 import { defineComponent } from "vue";
-import JetActionSection from "@/Jetstream/ActionSection.vue";
-import JetDialogModal from "@/Jetstream/DialogModal.vue";
-import JetDangerButton from "@/Jetstream/DangerButton.vue";
-import JetInput from "@/Jetstream/Input.vue";
-import JetInputError from "@/Jetstream/InputError.vue";
-import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
+import JetActionSection from "@/components/ActionSection.vue";
+import JetDialogModal from "@/components/DialogModal.vue";
+import JetDangerButton from "@/components/DangerButton.vue";
+import JetInput from "@/components/Input.vue";
+import JetInputError from "@/components/InputError.vue";
+import JetSecondaryButton from "@/components/SecondaryButton.vue";
 
 export default defineComponent({
 	components: {

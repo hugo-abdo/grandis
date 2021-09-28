@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import JetDropdown from "@/Jetstream/Dropdown.vue";
+import JetDropdown from "@/components/Dropdown.vue";
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { usePage } from "@inertiajs/inertia-vue3";

@@ -1,8 +1,14 @@
 <template>
 	<!-- Primary Navigation Menu -->
-	<div class="shadow rounded-md bg-white duration-200 dark:bg-groadis-dark" ref="container">
+	<div
+		class="shadow rounded-md bg-white duration-200 dark:bg-groadis-dark"
+		ref="container"
+	>
 		<div class="inline-flex items-center py-2 px-4 space-x-4 w-full">
-			<template v-for="(link,index) in links" :key="index">
+			<template
+				v-for="(link,index) in links"
+				:key="index"
+			>
 				<template v-if="index+1 < showCount">
 					<jet-nav-link
 						v-if="link.condition"
@@ -10,19 +16,29 @@
 						:active="route().current(link.pathName)"
 						:class="['capitalize' ,link.iconClass ? '':'py-1' ]"
 					>
-						<i v-if="link.iconClass" :class="[link.iconClass,'text-xl mr-1']"></i>
+						<i
+							v-if="link.iconClass"
+							:class="[link.iconClass,'text-xl mr-1']"
+						></i>
 						{{link.name}}
 					</jet-nav-link>
 				</template>
 			</template>
 
-			<jet-dropdown align="right" width="48" v-if="showMore">
+			<jet-dropdown
+				align="right"
+				width="48"
+				v-if="showMore"
+			>
 				<template #trigger>
 					<i class="las la-ellipsis-v text-lg cursor-pointer"></i>
 				</template>
 
 				<template #content>
-					<template v-for="(link,index) in links" :key="index">
+					<template
+						v-for="(link,index) in links"
+						:key="index"
+					>
 						<template v-if="index+1 > showCount">
 							<jet-dropdown-link :href="route(link.pathName)">{{link.name}}</jet-dropdown-link>
 						</template>
@@ -34,9 +50,9 @@
 </template>
 
 <script>
-import JetNavLink from "@/Jetstream/NavLink.vue";
-import JetDropdown from "@/Jetstream/Dropdown.vue";
-import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
+import JetNavLink from "@/components/NavLink.vue";
+import JetDropdown from "@/components/Dropdown.vue";
+import JetDropdownLink from "@/components/DropdownLink.vue";
 
 export default {
 	props: { links: Array },

@@ -1,4 +1,5 @@
 <template>
+
 	<Head title="Log in" />
 
 	<jet-authentication-card>
@@ -8,11 +9,17 @@
 
 		<jet-validation-errors class="mb-4" />
 
-		<div v-if="status" class="mb-4 font-medium text-sm text-green-600">{{ status }}</div>
+		<div
+			v-if="status"
+			class="mb-4 font-medium text-sm text-green-600"
+		>{{ status }}</div>
 
 		<form @submit.prevent="submit">
 			<div>
-				<jet-label for="email" value="Email" />
+				<jet-label
+					for="email"
+					value="Email"
+				/>
 				<jet-input
 					id="email"
 					type="email"
@@ -24,7 +31,10 @@
 			</div>
 
 			<div class="mt-4">
-				<jet-label for="password" value="Password" />
+				<jet-label
+					for="password"
+					value="Password"
+				/>
 				<jet-input
 					id="password"
 					type="password"
@@ -37,7 +47,10 @@
 
 			<div class="block mt-4">
 				<label class="flex items-center">
-					<jet-checkbox name="remember" v-model:checked="form.remember" />
+					<jet-checkbox
+						name="remember"
+						v-model:checked="form.remember"
+					/>
 					<span class="ml-2 text-sm text-gray-600">Remember me</span>
 				</label>
 			</div>
@@ -61,13 +74,13 @@
 
 <script>
 import { defineComponent } from "vue";
-import JetAuthenticationCard from "@/Jetstream/AuthenticationCard.vue";
-import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
-import JetButton from "@/Jetstream/Button.vue";
-import JetInput from "@/Jetstream/Input.vue";
-import JetCheckbox from "@/Jetstream/Checkbox.vue";
-import JetLabel from "@/Jetstream/Label.vue";
-import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
+import JetAuthenticationCard from "@/components/AuthenticationCard.vue";
+import JetAuthenticationCardLogo from "@/components/AuthenticationCardLogo.vue";
+import JetButton from "@/components/Button.vue";
+import JetInput from "@/components/Input.vue";
+import JetCheckbox from "@/components/Checkbox.vue";
+import JetLabel from "@/components/Label.vue";
+import JetValidationErrors from "@/components/ValidationErrors.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import EmptyVue from "@/Layouts/Empty.vue";
 
