@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Notifications\NewUserCreatedNotification;
+use App\Notifications\Notification as UserNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -23,14 +23,14 @@ class User extends Authenticatable
         parent::boot();
         static::created(function ($model) {
             Notification::send(
-                User::whereId(1)->get(),
-                new NewUserCreatedNotification($model->only('name', 'id'), 'new user created by ' . auth()->user()->name)
+                User::role('admin')->whereNotIn('id', [auth()->id()])->get(),
+                new UserNotification('new user created by ' . auth()->user()->name)
             );
         });
         static::updated(function ($model) {
             Notification::send(
-                User::whereId(1)->get(),
-                new NewUserCreatedNotification($model->only('name', 'id'), $model->name . ' was updated by ' . auth()->user()->name)
+                User::role('admin')->whereNotIn('id', [auth()->id()])->get(),
+                new UserNotification($model->name . ' was updated by ' . auth()->user()->name)
             );
         });
     }

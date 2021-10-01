@@ -9,29 +9,44 @@
 		<template #trigger>
 			<span
 				v-if="$store.state.hasNotificatios"
-				class="bg-red-50 text-red-400 border border-red-400 leading-none text-[0.6rem] p-0.5 pb-1 absolute shadow-md -top-1.5 -right-1.5 rounded-full"
-			>{{notificationsCount > 9 ? '9+': notificationsCount}}</span>
-			<i class="lar la-bell text-xl text-gray-400 mr-2 "></i>
+				class="bg-red-500 w-1.5 h-1.5 absolute top-1 right-1 ring-1 animate-ping ring-white rounded-full"
+			></span>
+			<span
+				v-if="$store.state.hasNotificatios"
+				class="bg-red-500 w-1.5 h-1.5 absolute top-1 right-1 ring-1 ring-white rounded-full"
+			></span>
+			<i class="las la-bell text-xl text-gray-400 mr-2 "></i>
 		</template>
 
 		<template #content>
-			<div class="select-none max-h-[calc(100vh/2)] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-roun scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-groadis dark:scrollbar-thumb-groadis-dark space-y-2 p-2 pr-3">
-				<template v-for="(notification, index) in $store.state.notifications">
-					<div :class="[
-								'relative p-1 px-2 text-gray-400 dark:text-gray-200 capitalize flex justify-between items-center duration-200 hover:shadow-md dark:hover:bg-gray-700 hover:bg-gray-200 hover:rounded-lg border-l-4',
-								{'bg-gray-200 dark:bg-gray-700 rounded-lg border-red-400':!notification.read_at}
-							]">
-						<span class="text-sm">{{notification.data.message}}</span>
-						<span
-							@click="readNotification(notification)"
-							:class="[
-									'bg-gray-300 w-2 h-2 rounded-full cursor-pointer',
-									{'!bg-red-400 ':!notification.read_at}
-								]"
-						></span>
-					</div>
-				</template>
+			<div class="max-h-[calc(100vh/2)] overflow-y-auto select-none scrollbar-thumb-rounded-full scrollbar-thin dark:scrollbar-thumb-gray-600 scrollbar-thumb-gray-200">
+				<div
+					@click="readNotification(notification)"
+					v-for="notification in $store.state.notifications"
+					:key="notification.id"
+					class="relative flex items-center p-2 border-b border-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 dark:border-gray-700"
+					:class="!notification.read_at ? 'bg-groadis cursor-pointer bg-opacity-20' : ''"
+				>
+					<span
+						:class="notification.read_at ? 'bg-gray-300' : 'bg-groadis'"
+						class="absolute right-2 top-1/2 w-2 h-2 rounded-full"
+					></span>
+					<img
+						class="flex-shrink-0 object-cover w-8 h-8 mx-1 rounded-full ring-2"
+						:src="notification.user.profile_photo_url"
+						alt="avatar"
+					/>
+					<p class="mx-2 text-sm text-gray-600 dark:text-white">
+						<span class="font-bold text-groadis">{{notification.user.name}}</span>
+						{{notification.message}}
+						<span class="block text-xs text-gray-400">{{notification.created_at}}</span>
+					</p>
+				</div>
 			</div>
+			<a
+				href="#"
+				class="block select-none py-2 font-bold text-center text-white bg-gray-800 dark:bg-gray-700 hover:underline"
+			>See all notifications</a>
 		</template>
 	</jet-dropdown>
 </template>
@@ -54,7 +69,7 @@ export default {
 		if (user) {
 			const { state } = useStore();
 
-			state.notifications = page.notifications;
+			state.notifications = page.notifications.data;
 
 			const notificationsCount = computed(() => {
 				return state.notifications.filter((n) => !n.read_at).length;
@@ -73,15 +88,13 @@ export default {
 				state.Echo.private(`App.Models.User.${user.id}`).notification(
 					(n) => {
 						state.hasNotificatios = true;
-						let notification = {
-							data: {
-								message: n.message,
-								user: n.user,
-							},
+						state.notifications.unshift({ ...n, read_at: null });
+						state.banners.push({
 							id: n.id,
-							read_at: null,
-						};
-						state.notifications.unshift(notification);
+							banner: n.message,
+							bannerStyle: "notification",
+							user: n.user,
+						});
 					}
 				);
 			}
@@ -96,7 +109,7 @@ export default {
 							preserveState: true,
 							preserveScroll: true,
 							onSuccess(page) {
-								state.notifications = page.props.notifications;
+								state.notifications = page.props.notifications.data;
 							},
 						}
 					);

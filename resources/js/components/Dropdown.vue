@@ -1,11 +1,18 @@
 <template>
 	<div class="relative">
-		<div @click="open = ! open" :class="triggerClasses">
+		<div
+			@click="open = ! open"
+			:class="triggerClasses"
+		>
 			<slot name="trigger"></slot>
 		</div>
 
 		<!-- Full Screen Dropdown Overlay -->
-		<div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
+		<div
+			v-show="open"
+			class="fixed inset-0 z-50"
+			@click="open = false"
+		></div>
 
 		<transition
 			enter-active-class="transition ease-out duration-200"
@@ -17,11 +24,14 @@
 		>
 			<div
 				v-show="open"
-				class="absolute z-50 mt-2 rounded-md"
+				class="absolute z-[100] mt-2 rounded-md"
 				:class="[widthClass, alignmentClasses]"
 				style="display: none;"
 			>
-				<div class="rounded-md ring-1 ring-black ring-opacity-5 shadow-lg" :class="contentClasses">
+				<div
+					class="rounded-md ring-1 ring-black ring-opacity-5 shadow-lg"
+					:class="contentClasses"
+				>
 					<slot name="content"></slot>
 				</div>
 			</div>

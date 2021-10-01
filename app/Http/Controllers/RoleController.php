@@ -64,8 +64,7 @@ class RoleController extends Controller
             'color' => $data['color'],
         ]);
 
-        $request->session()->flash('flash.banner', 'role created');
-        $request->session()->flash('flash.bannerStyle', 'success');
+        banner("success", 'role created successfuly');
 
         return redirect()->route('roles.index');
     }
@@ -125,9 +124,7 @@ class RoleController extends Controller
             'name' => $data['name'],
             'color' => $data['color'],
         ]);
-
-        $request->session()->flash('flash.banner', 'role updated');
-        $request->session()->flash('flash.bannerStyle', 'success');
+        banner('success', 'role updated');
 
         return redirect()->route('roles.index');
     }
@@ -142,14 +139,11 @@ class RoleController extends Controller
     {
         $this->authorize('delete_role');
         if ($role->name == 'admin') {
-            $request->session()->flash('flash.banner', 'you can\'t delete the admin');
-            $request->session()->flash('flash.bannerStyle', 'danger');
+            banner('warning', 'you can\'t delete the admin');
             return back(303);
         }
         $role->delete();
-
-        $request->session()->flash('flash.banner', 'role deleted');
-        $request->session()->flash('flash.bannerStyle', 'success');
+        banner('info', 'role deleted successfuly');
         return back(303);
     }
 

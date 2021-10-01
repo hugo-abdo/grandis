@@ -29,6 +29,7 @@ createInertiaApp({
     setup({ el, app, props, plugin }) {
         el.dataset.page = "page";
         Store.commit("INIT_APP");
+        props.initialPage.props.jetstream.flash = [];
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(VTooltip)

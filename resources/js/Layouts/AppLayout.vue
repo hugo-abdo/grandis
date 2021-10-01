@@ -1,7 +1,7 @@
 <template>
 
 	<Head :title="title" />
-	<jet-banner />
+	<banners />
 	<div class="pt-1">
 		<nav :class="[
 				'fixed inset-x-0 sm:right-5 top-0 sm:rounded-b-lg z-50 bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark',
@@ -263,9 +263,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, onUnmounted, ref } from "vue";
 import JetApplicationMark from "@/components/ApplicationMark.vue";
-import JetBanner from "@/components/Banner.vue";
 import JetDropdown from "@/components/Dropdown.vue";
 import JetDropdownLink from "@/components/DropdownLink.vue";
 import JetNavLink from "@/components/NavLink.vue";
@@ -277,6 +276,7 @@ import can from "@/mixins";
 import SideBar from "@/components/SideBar.vue";
 import { useStore } from "vuex";
 import Notifications from "../components/Notifications.vue";
+import Banners from "../components/Banners.vue";
 
 export default defineComponent({
 	props: { title: String },
@@ -284,7 +284,6 @@ export default defineComponent({
 	components: {
 		Head,
 		JetApplicationMark,
-		JetBanner,
 		JetDropdown,
 		JetDropdownLink,
 		JetNavLink,
@@ -292,10 +291,10 @@ export default defineComponent({
 		Link,
 		SideBar,
 		Notifications,
+		Banners,
 	},
 
 	setup() {
-		const user = usePage().props.value.user;
 		const { state } = useStore();
 
 		const showingNavigationDropdown = ref(true);
@@ -310,7 +309,7 @@ export default defineComponent({
 			{
 				name: "users",
 				pathName: "users.index",
-				iconClass: "las la-users",
+				iconClass: "las la-user-friends",
 				condition: can("show_user"),
 				isActive: "users.*",
 			},

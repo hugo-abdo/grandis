@@ -4,7 +4,7 @@
 		@mouseenter="$store.state.sideBarActive = true"
 		@mouseleave="$store.state.sideBarActive = false"
 		:class="[
-		'fixed inset-y-0 duration-200 z-50 hidden sm:block  overflow-hidden',
+		'fixed inset-y-0 duration-200 z-[49] hidden sm:block  overflow-hidden',
 		$store.state.sideBarActive ? 'w-52': 'w-12'
 	]"
 	>
@@ -20,11 +20,14 @@
 				>
 					<jet-nav-link
 						:href="route(link.pathName)"
-						class="capitalize group"
+						class="capitalize group "
 					>
 						<i
-							:class="link.iconClass"
-							class="text-xl mr-2"
+							:class="[
+							link.iconClass,
+							{'bg-groadis px-1 text-white rounded-md shadow-groadis':route().current(link.isActive)} 
+							]"
+							class="text-xl mr-2 "
 						></i>
 						<span class="group-hover:ml-4 ml-2 duration-200">{{link.name}}</span>
 					</jet-nav-link>

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,7 +12,6 @@ class Notification extends BaseNotification
 {
     use Queueable;
 
-    public $createdUser;
     public $message;
 
     /**
@@ -19,9 +19,8 @@ class Notification extends BaseNotification
      *
      * @return void
      */
-    public function __construct($createdUser, $message)
+    public function __construct($message)
     {
-        $this->createdUser = $createdUser;
         $this->message = $message;
     }
 
@@ -81,7 +80,8 @@ class Notification extends BaseNotification
     {
         return [
             'message' => $this->message,
-            'user' => $this->createdUser,
+            'created_at' => Carbon::make(now())->diffForHumans(),
+            'user' => auth()->user()->only(['id', 'name', 'profile_photo_url']),
         ];
     }
 }

@@ -84,7 +84,7 @@
 					]"
 					v-tooltip="{ content: row.is_active ?'Active':'Not Active' }"
 					class="w-8 h-8 ml-4 rounded-full ring-2 object-cover shadow-md"
-					:src="row.profile_photo_path ? 'http://grandis.test/storage/'+ row.profile_photo_path: row.profile_photo_url"
+					:src="row.profile_photo_url"
 					:alt="row.name"
 				/>
 			</div>

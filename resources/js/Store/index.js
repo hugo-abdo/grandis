@@ -13,6 +13,7 @@ export default createStore({
         sideBarActive: false,
         hasNotificatios: false,
         notifications: [],
+        banners: [],
     }),
     getters: {
         isDark: (state) => state.isDark,

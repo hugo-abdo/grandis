@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Laravel\Jetstream\Jetstream;
@@ -58,9 +59,12 @@ class HandleInertiaRequests extends Middleware
             },
             'notifications' => function () {
                 if (!auth()->guest()) {
-                    return auth()->user()->notifications()
-                        ->take(20)->orderBy('created_at', 'desc')
-                        ->get(['id', 'data', 'read_at', 'created_at']);
+                    return NotificationResource::collection(
+                        auth()->user()->notifications()
+                            ->take(10)
+                            ->orderBy('created_at', 'desc')
+                            ->get()
+                    );
                 }
             },
         ]);

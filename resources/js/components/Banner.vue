@@ -1,72 +1,76 @@
 <template>
-	<transition
-		enter-active-class="transition ease-out duration-500"
-		enter-from-class="transform opacity-0 scale-95 translate-x-80"
-		enter-to-class="transform opacity-100 scale-100 translate-x-0"
-		leave-active-class="transition ease-in duration-100"
-		leave-from-class="transform opacity-100 scale-100 translate-y-0"
-		leave-to-class="transform opacity-0 scale-95 translate-y-80"
+	<div
+		v-if="banner.bannerStyle == 'notification'"
+		class="flex w-full border dark:border-groadis-darker max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
 	>
-		<div
-			class="shadow-md fixed rounded-lg overflow-hidden right-5 bottom-5 z-50"
-			v-if="show && message"
-		>
-			<div class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-				<div
-					class="flex items-center justify-center w-12 "
-					:class="{ 'bg-green-300': style == 'success', 'bg-red-500': style == 'danger' }"
-				>
-					<svg
-						class="w-6 h-6 text-white fill-current"
-						viewBox="0 0 40 40"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
-					</svg>
-				</div>
+		<div class="w-2 bg-groadis"></div>
 
-				<div class="px-4 py-2 -mx-3">
-					<div class="mx-3">
-						<span class="font-semibold text-green-500 dark:text-green-400">{{style}}</span>
-						<p class="text-sm text-gray-600 dark:text-gray-200">{{ message }}</p>
-					</div>
-				</div>
+		<div class="flex items-center px-2 py-2">
+			<div class="w-10 h-10 rounded-full overflow-hidden">
+				<img
+					class="object-cover w-full h-full "
+					alt="User avatar"
+					:src="banner.user.profile_photo_url"
+				>
+			</div>
+
+			<div class="mx-3">
+				<p class="text-gray-600 dark:text-gray-200">
+					<a class="text-blue-500 dark:text-blue-300 hover:text-blue-400 hover:underline">{{banner.user.name}}</a>
+					{{banner.banner}}
+				</p>
 			</div>
 		</div>
-	</transition>
+	</div>
+	<div
+		v-else
+		:class="{
+					'shadow-md bg-white dark:bg-groadis-dark border rounded-lg overflow-hidden flex w-full max-w-xs':true,
+					'border-green-300':banner.bannerStyle == 'success',
+					'border-red-500': banner.bannerStyle == 'error',
+					'border-blue-500': banner.bannerStyle == 'info',
+					'border-yellow-500': banner.bannerStyle == 'warning',
+				}"
+	>
+		<div :class="[
+						'flex items-center justify-center w-12',
+							{
+								'bg-green-300': banner.bannerStyle == 'success',
+								'bg-red-500': banner.bannerStyle == 'error',
+								'bg-blue-500': banner.bannerStyle == 'info',
+								'bg-yellow-500': banner.bannerStyle == 'warning',
+							}
+						]">
+			<banner-icon :type="banner.bannerStyle" />
+		</div>
+		<div class="px-4 py-2 -mx-3">
+			<div class="mx-3 text-sm tracking-wider capitalize ">
+				<span :class="[
+							'font-semibold',
+								{
+									'text-green-300':banner.bannerStyle == 'success',
+									'text-red-500': banner.bannerStyle == 'error',
+									'text-blue-500': banner.bannerStyle == 'info',
+									'text-yellow-500': banner.bannerStyle == 'warning',
+								}
+							]">{{banner.bannerStyle}}</span>
+				<p class="text-gray-600 font-medium dark:text-gray-200">{{banner.banner}}</p>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import BannerIcon from "./BannerIcon.vue";
 
 export default defineComponent({
-	data() {
-		return {
-			show: false,
-		};
-	},
-
-	computed: {
-		style() {
-			return this.$page.props.jetstream.flash?.bannerStyle || "success";
-		},
-
-		message() {
-			return this.$page.props.jetstream.flash?.banner || "";
-		},
-	},
-
-	watch: {
-		message() {
-			if (!this.show) {
-				this.show = true;
-				let closeNotification = setTimeout(() => {
-					this.show = false;
-					this.$page.props.jetstream.flash.banner = null;
-					clearTimeout(closeNotification);
-				}, 3000);
-			}
-		},
+	components: { BannerIcon },
+	props: ["banner"],
+	created() {
+		setTimeout(() => {
+			this.$emit("removeFromeList", this.banner.id);
+		}, 5000);
 	},
 });
 </script>

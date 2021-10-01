@@ -59,8 +59,7 @@ class UserController extends Controller
 
         $updater->update($user, $request->all());
 
-        $request->session()->flash('flash.banner', 'profile information updated');
-        $request->session()->flash('flash.bannerStyle', 'success');
+        banner('success', 'profile information updated');
 
         return back();
     }
@@ -79,8 +78,7 @@ class UserController extends Controller
         $this->authorize('create_user');
         $user = $creator->create(request()->all());
 
-        $request->session()->flash('flash.banner', 'User Created Successfuly');
-        $request->session()->flash('flash.bannerStyle', 'success');
+        banner('info', 'user created successfuly');
 
         return redirect()->route('users.index');
     }
@@ -90,8 +88,7 @@ class UserController extends Controller
         $this->authorize('edit_user');
         $user->deleteProfilePhoto();
 
-        $request->session()->flash('flash.banner', 'profile photo deleted');
-        $request->session()->flash('flash.bannerStyle', 'success');
+        banner('info', 'profile photo deleted');
 
         return back();
     }
@@ -109,8 +106,7 @@ class UserController extends Controller
             ]);
         } else {
             $user->delete();
-            $request->session()->flash('flash.banner', 'User Deleted Successfuly');
-            $request->session()->flash('flash.bannerStyle', 'success');
+            banner('success', 'User Deleted Successfuly');
         }
         return back();
     }
@@ -128,7 +124,7 @@ class UserController extends Controller
                 $msg = 'You can\'t delete your acount from her';
 
                 $request->session()->flash('flash.banner', 'You can\'t delete your acount from her');
-                $request->session()->flash('flash.bannerStyle', 'danger');
+                $request->session()->flash('flash.bannerStyle', 'error');
             }
 
             throw ValidationException::withMessages([
@@ -138,8 +134,7 @@ class UserController extends Controller
             User::whereIn('id', $data['users'])->each(function ($user) {
                 $user->delete();
             });
-            $request->session()->flash('flash.banner', 'Selection Deleted Successfuly');
-            $request->session()->flash('flash.bannerStyle', 'success');
+            banner('info', 'Selection Deleted Successfuly');
         }
         return back();
     }
@@ -149,11 +144,13 @@ class UserController extends Controller
     {
         $this->authorize('edit_user_status');
 
-        $user->is_active = !$user->is_active;
-        $user->save();
+        $user->update([
+            'is_active' => !$user->is_active,
+        ]);
+
         $msg = $user->is_active ? 'Active' : 'Not Active';
-        $request->session()->flash('flash.banner', $user->name . ' is ' . $msg . ' Now');
-        $request->session()->flash('flash.bannerStyle', $user->is_active ? 'success' : 'danger');
+
+        banner($user->is_active ? 'success' : 'notification', $user->name . ' is ' . $msg . ' Now');
 
         return inertiaPro('Users/Index', [
             'newUser' => (new UserResource($user))->toArray($request),
