@@ -8,6 +8,7 @@ import Store from "./Store";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Card from "@/components/Card.vue";
 import can from "./mixins/index";
+import { useDark } from "@vueuse/core";
 
 const appName = document.getElementsByTagName("title")[0]?.innerText || "";
 const pages = import.meta.glob("./Pages/**/*.vue");

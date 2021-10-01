@@ -11,12 +11,20 @@ export default createStore({
         Echo: {},
         isDark: false,
         sideBarActive: false,
-        hasNotificatios: false,
         notifications: [],
         banners: [],
     }),
     getters: {
         isDark: (state) => state.isDark,
+        hasNotificatios: (state) => {
+            let hasNotificatios = false;
+            state.notifications.map((n) => {
+                if (!n.read_at) {
+                    hasNotificatios = true;
+                }
+            });
+            return hasNotificatios;
+        },
     },
     mutations: {
         INIT_APP(state) {
@@ -27,6 +35,16 @@ export default createStore({
                 wsPort: 6001,
                 forceTLS: false,
                 disableStats: true,
+            });
+        },
+        HANDEL_NOTIFICATIONS(state, notification) {
+            // state.hasNotificatios = true;
+            state.notifications.unshift({ ...notification, read_at: null });
+            state.banners.push({
+                id: notification.id,
+                banner: notification.message,
+                bannerStyle: "notification",
+                user: notification.user,
             });
         },
     },

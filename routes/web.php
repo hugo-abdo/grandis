@@ -18,10 +18,11 @@ use Inertia\Inertia;
 |
  */
 
+Route::get('/', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard')->middleware('auth');
+
 Route::middleware(['auth', 'is_active'])->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
 
     Route::get('/read-notifications/{notification}', function (DatabaseNotification $notification) {
         $notification->markAsRead();

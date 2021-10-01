@@ -4,15 +4,14 @@
 		width="72"
 		contentClasses="bg-white duration-200 overflow-hidden dark:bg-groadis-dark mt-5"
 		triggerClasses="w-5 h-5 cursor-pointer"
-		@click="$store.state.hasNotificatios = false"
 	>
 		<template #trigger>
 			<span
-				v-if="$store.state.hasNotificatios"
-				class="bg-red-500 w-1.5 h-1.5 absolute top-1 right-1 ring-1 animate-ping ring-white rounded-full"
+				v-if="$store.getters.hasNotificatios"
+				class="bg-red-500 w-2.5 h-2.5 absolute top-0.5 animate-ping right-0.5  ring-white rounded-full"
 			></span>
 			<span
-				v-if="$store.state.hasNotificatios"
+				v-if="$store.getters.hasNotificatios"
 				class="bg-red-500 w-1.5 h-1.5 absolute top-1 right-1 ring-1 ring-white rounded-full"
 			></span>
 			<i class="las la-bell text-xl text-gray-400 mr-2 "></i>
@@ -44,9 +43,14 @@
 				</div>
 			</div>
 			<a
+				v-if="$store.state.notifications.length"
 				href="#"
-				class="block select-none py-2 font-bold text-center text-white bg-gray-800 dark:bg-gray-700 hover:underline"
+				class="block select-none py-2 font-bold text-center text-gray-700 dark:text-white bg-white dark:bg-gray-700 hover:underline"
 			>See all notifications</a>
+			<span
+				v-else
+				class="block select-none py-2 font-bold text-center text-gray-700 dark:text-white bg-white dark:bg-gray-700"
+			>you don't have notification</span>
 		</template>
 	</jet-dropdown>
 </template>
@@ -65,59 +69,33 @@ export default {
 	setup() {
 		const page = usePage().props.value;
 		const user = ref(page.user).value;
+		const { state, commit } = useStore();
 
-		if (user) {
-			const { state } = useStore();
+		state.notifications = page.notifications.data;
 
-			state.notifications = page.notifications.data;
+		!state.Echo.connector.channels[`private-App.Models.User.${user.id}`] &&
+			state.Echo.private(`App.Models.User.${user.id}`).notification((n) =>
+				commit("HANDEL_NOTIFICATIONS", n)
+			);
 
-			const notificationsCount = computed(() => {
-				return state.notifications.filter((n) => !n.read_at).length;
-			});
-
-			Array.from(state.notifications).map((n) => {
-				// check if ther is new notifications to see
-				if (!n.read_at) {
-					state.hasNotificatios = true;
-				}
-			});
-
-			if (
-				!state.Echo.connector.channels[`private-App.Models.User.${user.id}`]
-			) {
-				state.Echo.private(`App.Models.User.${user.id}`).notification(
-					(n) => {
-						state.hasNotificatios = true;
-						state.notifications.unshift({ ...n, read_at: null });
-						state.banners.push({
-							id: n.id,
-							banner: n.message,
-							bannerStyle: "notification",
-							user: n.user,
-						});
+		function readNotification(notification) {
+			state.hasNotificatios = false;
+			if (!notification.read_at) {
+				Inertia.get(
+					route("readNotification", notification.id),
+					{},
+					{
+						preserveState: true,
+						preserveScroll: true,
+						onSuccess(page) {
+							state.notifications = page.props.notifications.data;
+						},
 					}
 				);
 			}
-
-			function readNotification(notification) {
-				state.hasNotificatios = false;
-				if (!notification.read_at) {
-					Inertia.get(
-						route("readNotification", notification.id),
-						{},
-						{
-							preserveState: true,
-							preserveScroll: true,
-							onSuccess(page) {
-								state.notifications = page.props.notifications.data;
-							},
-						}
-					);
-				}
-			}
-
-			return { readNotification, notificationsCount };
 		}
+
+		return { readNotification };
 	},
 };
 </script>

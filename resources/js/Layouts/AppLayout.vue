@@ -3,10 +3,13 @@
 	<Head :title="title" />
 	<banners />
 	<div class="pt-1">
-		<nav :class="[
+		<nav
+			v-if="$page.props.user"
+			:class="[
 				'fixed inset-x-0 sm:right-5 top-0 sm:rounded-b-lg z-50 bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark',
 				$store.state.sideBarActive ? 'left-56': 'sm:left-16'
-				]">
+				]"
+		>
 			<!-- Primary Navigation Menu -->
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-2.5">
@@ -249,7 +252,7 @@
 
 		<side-bar
 			:links="links"
-			v-if="links.length"
+			v-if="links.length && $page.props.user"
 			:key="route().current()"
 		/>
 		<!-- Page Content -->
@@ -270,7 +273,7 @@ import JetDropdownLink from "@/components/DropdownLink.vue";
 import JetNavLink from "@/components/NavLink.vue";
 import JetResponsiveNavLink from "@/components/ResponsiveNavLink.vue";
 import { Head, Link, usePage } from "@inertiajs/inertia-vue3";
-import { useDark, useToggle } from "@vueuse/core";
+import { isDark, toggleDark } from "@/mixins/useDarkMode.js";
 import { Inertia } from "@inertiajs/inertia";
 import can from "@/mixins";
 import SideBar from "@/components/SideBar.vue";
@@ -296,6 +299,7 @@ export default defineComponent({
 
 	setup() {
 		const { state } = useStore();
+		state.isDark = isDark;
 
 		const showingNavigationDropdown = ref(true);
 		const links = [
@@ -332,11 +336,6 @@ export default defineComponent({
 		function logout() {
 			Inertia.post(route("logout"));
 		}
-
-		const isDark = useDark();
-		const toggleDark = useToggle(isDark);
-		state.isDark = isDark;
-
 		return { logout, isDark, toggleDark, showingNavigationDropdown, links };
 	},
 });

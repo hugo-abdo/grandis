@@ -13,15 +13,17 @@ class Notification extends BaseNotification
     use Queueable;
 
     public $message;
+    public $data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $data = null)
     {
         $this->message = $message;
+        $this->data = $data;
     }
 
     /**
@@ -82,6 +84,7 @@ class Notification extends BaseNotification
             'message' => $this->message,
             'created_at' => Carbon::make(now())->diffForHumans(),
             'user' => auth()->user()->only(['id', 'name', 'profile_photo_url']),
+            'data' => $this->data,
         ];
     }
 }
