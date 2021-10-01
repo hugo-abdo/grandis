@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Notifications\Notification as UserNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,25 +22,25 @@ class User extends Authenticatable
     {
         parent::boot();
         static::created(function ($model) {
-            // if (!auth()->guest()) {
-            //     Notification::send(
-            //         User::role('admin')->whereNotIn('id', [auth()->id()])->get(),
-            //         new UserNotification('new user created by ' . auth()->user()->name)
-            //     );
-            // }
+            if (!auth()->guest()) {
+                Notification::send(
+                    User::role('admin')->whereNotIn('id', [auth()->id()])->get(),
+                    new UserNotification('new user created by ' . auth()->user()->name)
+                );
+            }
         });
         static::updated(function ($model) {
-            // if (!auth()->guest()) {
-            //     Notification::send(
-            //         User::role('admin')->whereNotIn('id', [auth()->id()])->get(),
-            //         new UserNotification('Update ' . $model->name . ' Profile.',
-            //             [
-            //                 'user' => $model,
-            //                 'action' => 'update-user',
-            //             ]
-            //         )
-            //     );
-            // }
+            if (!auth()->guest()) {
+                Notification::send(
+                    User::role('admin')->whereNotIn('id', [auth()->id()])->get(),
+                    new UserNotification('Update ' . $model->name . ' Profile.',
+                        [
+                            'user' => $model,
+                            'action' => 'update-user',
+                        ]
+                    )
+                );
+            }
         });
     }
 
