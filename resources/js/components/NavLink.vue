@@ -1,6 +1,9 @@
 <template>
-	<Link :href="href" class="inline-flex items-center font-medium focus:outline-none pl-3 py-2">
-		<slot />
+	<Link
+		:href="href"
+		class="inline-flex items-center font-medium focus:outline-none pl-1.5 py-1.5"
+	>
+	<slot />
 	</Link>
 </template>
 

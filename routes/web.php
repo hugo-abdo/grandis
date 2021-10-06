@@ -40,4 +40,5 @@ Route::middleware(['auth', 'is_active'])->group(function () {
 
     // products routes
     Route::resource('shop', ProductController::class);
+    Route::resource('products', ProductController::class);
 });

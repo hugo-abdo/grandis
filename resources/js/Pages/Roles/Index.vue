@@ -1,11 +1,13 @@
 <template>
-	<h1
-		class="text-gray-600 duration-200 dark:text-gray-300 font-semibold text-3xl"
-	>Roles And Permissions</h1>
+	<h1 class="text-gray-600 duration-200 dark:text-gray-300 font-semibold text-3xl">Roles And Permissions</h1>
 	<actions>
-		<action-button :isActive="true" class="bg-groadis text-white" tooltipMsg="Add New Role">
+		<action-button
+			:isActive="true"
+			class="bg-groadis text-white"
+			tooltipMsg="Add New Role"
+		>
 			<Link :href="route('roles.create')">
-				<i class="las la-plus-circle text-xl"></i>
+			<i class="las la-plus-circle text-xl"></i>
 			</Link>
 		</action-button>
 	</actions>
@@ -17,9 +19,7 @@
 		>
 			<div class="absolute right-2">
 				<Link :href="route('roles.edit',role.id)">
-					<i
-						class="las la-pen inline-block bg-gray-200 p-1 rounded-full shadow active:shadow-none cursor-pointer"
-					></i>
+				<i class="lar la-edit inline-block bg-gray-200 text-gray-800 p-1 rounded-full shadow active:shadow-none cursor-pointer"></i>
 				</Link>
 				<Link
 					class="ml-2"
@@ -28,9 +28,7 @@
 					as="button"
 					:href="route('roles.destroy',role.id)"
 				>
-					<i
-						class="lar la-trash-alt inline-block bg-red-400 text-white p-1 rounded-full shadow active:shadow-none cursor-pointer"
-					></i>
+				<i class="lar la-trash-alt inline-block bg-red-400 text-white p-1 rounded-full shadow active:shadow-none cursor-pointer"></i>
 				</Link>
 			</div>
 			<div class="grid grid-cols-3 gap-x-4">
@@ -44,9 +42,7 @@
 							:src="`http://grandis.test/storage/roles/${role.name}.png`"
 							alt="admin image"
 						/>
-						<span
-							class="absolute bottom-0 py-1 shadow-md text-center inset-x-0 bg-gray-900 bg-opacity-50"
-						>
+						<span class="absolute bottom-0 py-1 shadow-md text-center inset-x-0 bg-gray-900 bg-opacity-50">
 							<h2 class="text-center font-semibold text-white capitalize">{{role.name}}</h2>
 						</span>
 					</div>

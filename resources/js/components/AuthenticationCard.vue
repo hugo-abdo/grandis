@@ -2,10 +2,10 @@
 	<div class="max-w-sm mx-auto min-h-screen py-10 lg:max-w-4xl flex justify-center items-center ">
 		<div class="w-full flex overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
 			<div
-				class="hidden bg-cover lg:flex lg:w-1/2  items-center justify-center"
-				style="background-image:url('/assets/images/photo-1606660265514-358ebbadc80d.jpg')"
+				class="hidden bg-cover bg-right lg:flex lg:w-1/2  items-center justify-center "
+				style="background-image:url('/assets/images/authentication.png')"
 			>
-				<div class="dark:bg-gray-900 bg-gray-50 shadow !bg-opacity-50 w-11/12 py-5 rounded-lg">
+				<div class="dark:bg-gray-900 bg-gray-50 shadow !bg-opacity-70 w-11/12 py-5 rounded-lg">
 					<slot name="logo" />
 				</div>
 			</div>

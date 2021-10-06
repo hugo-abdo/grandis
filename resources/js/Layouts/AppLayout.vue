@@ -6,29 +6,54 @@
 		<nav
 			v-if="$page.props.user"
 			:class="[
-				'fixed inset-x-0 sm:right-5 top-0 sm:rounded-b-lg z-50 bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark',
-				$store.state.sideBarActive ? 'left-56': 'sm:left-16'
+				'fixed inset-x-0 sm:right-4 top-0 rounded-b-lg z-50 bg-white dark:bg-groadis-dark border-b shadow border-gray-100 duration-200 dark:border-groadis-dark',
+				$store.state.sideBarActive ? 'left-[11.5rem]': 'sm:left-14'
 				]"
 		>
 			<!-- Primary Navigation Menu -->
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-2.5">
-					<div class="flex-shrink-0 flex items-center"></div>
+					<button
+						@click="$store.state.sideBarActive = !$store.state.sideBarActive"
+						class="text-gray-400 focus:outline-none"
+					>
+						<svg
+							class="h-6 w-6"
+							stroke="currentColor"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<path
+								:class="{'hidden': $store.state.sideBarActive, 'inline-flex': ! $store.state.sideBarActive }"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 12h16M4 18h16"
+							/>
+							<path
+								:class="{'hidden': ! $store.state.sideBarActive, 'inline-flex': $store.state.sideBarActive }"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						</svg>
+					</button>
 
 					<div class="flex items-center space-x-3">
-						<notifications class="hidden sm:block" />
+						<notifications />
 						<i
 							@click="toggleDark"
-							:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
-							class="hidden sm:block cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner"
+							:class="isDark ?'las la-sun ' : 'las la-moon'"
+							class="text-xl text-gray-400 pt-1 cursor-pointer duration-200"
 						></i>
 
-						<div class="hidden sm:flex sm:items-center">
+						<div class="sm:flex sm:items-center">
 							<!-- Settings Dropdown -->
 							<div class="relative">
 								<jet-dropdown
 									align="right"
-									width="48"
+									width="56"
 									contentClasses="bg-white duration-200 dark:bg-groadis-dark mt-2"
 								>
 									<template #trigger>
@@ -95,157 +120,6 @@
 							</div>
 						</div>
 					</div>
-
-					<!-- Hamburger -->
-					<div class="-mr-2 flex items-center sm:hidden space-x-3">
-						<notifications />
-						<i
-							@click="toggleDark"
-							:class="isDark ?'lar la-sun text-white' : 'lar la-moon text-groadis'"
-							class="cursor-pointer duration-200 dark:bg-groadis-darker bg-gray-200 rounded-full leading-none p-1 shadow-inner"
-						></i>
-						<button
-							@click="showingNavigationDropdown = ! showingNavigationDropdown"
-							class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 focus:text-gray-500 transition"
-						>
-							<svg
-								class="h-6 w-6"
-								stroke="currentColor"
-								fill="none"
-								viewBox="0 0 24 24"
-							>
-								<path
-									:class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 6h16M4 12h16M4 18h16"
-								/>
-								<path
-									:class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							</svg>
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<!-- Responsive Navigation Menu -->
-			<div
-				:class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
-				class="sm:hidden"
-			>
-				<!-- Responsive Settings Options -->
-				<div class="pt-4 pb-1">
-					<div class="flex items-center px-4">
-						<div
-							v-if="$page.props.jetstream.managesProfilePhotos"
-							class="flex-shrink-0 mr-3"
-						>
-							<img
-								class="h-10 w-10 rounded-full object-cover"
-								:src="$page.props.user.profile_photo_url"
-								:alt="$page.props.user.name"
-							/>
-						</div>
-
-						<div>
-							<div class="font-medium text-base text-gray-800 duration-200 dark:text-gray-200">{{ $page.props.user.name }}</div>
-							<div class="font-medium text-sm text-gray-500 duration-200 dark:text-gray-400">{{ $page.props.user.email }}</div>
-						</div>
-					</div>
-
-					<div class="mt-3 space-y-1">
-						<jet-responsive-nav-link
-							:href="route('profile.show')"
-							:active="route().current('profile.show')"
-						>Profile</jet-responsive-nav-link>
-
-						<jet-responsive-nav-link
-							:href="route('api-tokens.index')"
-							:active="route().current('api-tokens.index')"
-							v-if="$page.props.jetstream.hasApiFeatures"
-						>API Tokens</jet-responsive-nav-link>
-
-						<!-- Authentication -->
-						<form
-							method="POST"
-							@submit.prevent="logout"
-						>
-							<jet-responsive-nav-link as="button">Log Out</jet-responsive-nav-link>
-						</form>
-
-						<!-- Team Management -->
-						<template v-if="$page.props.jetstream.hasTeamFeatures">
-							<div class="border-t border-gray-200"></div>
-
-							<div class="block px-4 py-2 text-xs text-gray-400">Manage Team</div>
-
-							<!-- Team Settings -->
-							<jet-responsive-nav-link
-								:href="route('teams.show', $page.props.user.current_team)"
-								:active="route().current('teams.show')"
-							>Team Settings</jet-responsive-nav-link>
-
-							<jet-responsive-nav-link
-								:href="route('teams.create')"
-								:active="route().current('teams.create')"
-								v-if="$page.props.jetstream.canCreateTeams"
-							>Create New Team</jet-responsive-nav-link>
-
-							<div class="border-t border-gray-200"></div>
-
-							<!-- Team Switcher -->
-							<div class="block px-4 py-2 text-xs text-gray-400">Switch Teams</div>
-
-							<template
-								v-for="team in $page.props.user.all_teams"
-								:key="team.id"
-							>
-								<form @submit.prevent="switchToTeam(team)">
-									<jet-responsive-nav-link as="button">
-										<div class="flex items-center">
-											<svg
-												v-if="team.id == $page.props.user.current_team_id"
-												class="mr-2 h-5 w-5 text-green-400"
-												fill="none"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-											>
-												<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-											</svg>
-											<div>{{ team.name }}</div>
-										</div>
-									</jet-responsive-nav-link>
-								</form>
-							</template>
-						</template>
-					</div>
-				</div>
-				<div class="pt-2 pb-3 space-y-1 capitalize border-t border-gray-200">
-					<template
-						v-for="(link,index) in links"
-						:key="index"
-					>
-						<jet-responsive-nav-link
-							v-if="link.condition"
-							:href="route(link.pathName)"
-							:active="route().current(link.pathName)"
-						>
-							<i
-								v-if="link.iconClass"
-								:class="[link.iconClass,'text-xl mr-1']"
-							></i>
-							{{link.name}}
-						</jet-responsive-nav-link>
-					</template>
 				</div>
 			</div>
 		</nav>
@@ -257,8 +131,8 @@
 		/>
 		<!-- Page Content -->
 		<main :class="[
-				'mt-20 pb-5 px-5 duration-200 max-w-7xl mx-auto',
-				$store.state.sideBarActive ? 'sm:pl-56': 'sm:pl-16'
+				'mt-20 px-5 sm:pr-4 duration-200 max-w-7xl mx-auto',
+				$store.state.sideBarActive ? 'pl-[11.5rem] max-w-full': 'sm:pl-14'
 			]">
 			<slot></slot>
 		</main>
@@ -307,28 +181,35 @@ export default defineComponent({
 				name: "dashboard",
 				pathName: "dashboard",
 				iconClass: "las la-tachometer-alt",
-				condition: can(""),
+				condition: true,
 				isActive: "dashboard",
 			},
 			{
 				name: "users",
 				pathName: "users.index",
 				iconClass: "las la-user-friends",
-				condition: can("show_user"),
+				condition: true,
 				isActive: "users.*",
+			},
+			{
+				name: "products",
+				pathName: "products.index",
+				iconClass: "las la-shopping-bag",
+				condition: true,
+				isActive: "products.*",
 			},
 			{
 				name: "roles",
 				pathName: "roles.index",
 				iconClass: "las la-user-shield",
-				condition: can("show_role"),
+				condition: true,
 				isActive: "roles.*",
 			},
 			{
 				name: "shop",
 				pathName: "shop.index",
 				iconClass: "las la-store-alt",
-				condition: can("show_product"),
+				condition: true,
 				isActive: "shop.*",
 			},
 		];

@@ -13,10 +13,7 @@
 			<card class="mt-2 space-y-4">
 				<filter-section title="Multi Range :">
 					<div class="flex items-center ">
-						<jet-input
-							type="checkbox"
-							id="range-all"
-						/>
+						<jet-checkbox id="range-all" />
 						<jet-label
 							for="range-all"
 							class="ml-2"
@@ -25,10 +22,7 @@
 				</filter-section>
 				<filter-section title="Categories :">
 					<div class="flex items-center">
-						<jet-input
-							type="checkbox"
-							id="range-all"
-						/>
+						<jet-checkbox id="range-all" />
 						<jet-label
 							for="range-all"
 							class="ml-2"
@@ -37,10 +31,7 @@
 				</filter-section>
 				<filter-section title="Brands :">
 					<div class="flex items-center">
-						<jet-input
-							type="checkbox"
-							id="range-all"
-						/>
+						<jet-checkbox id="range-all" />
 						<jet-label
 							for="range-all"
 							class="ml-2"
@@ -49,10 +40,7 @@
 				</filter-section>
 				<filter-section title="ratings :">
 					<div class="flex items-center">
-						<jet-input
-							type="checkbox"
-							id="range-all"
-						/>
+						<jet-checkbox id="range-all" />
 						<jet-label
 							for="range-all"
 							class="ml-2"
@@ -70,6 +58,7 @@
 <script>
 import JetLabel from "../../components/Label.vue";
 import JetInput from "../../components/Input.vue";
+import JetCheckbox from "../../components/Checkbox.vue";
 import Product from "./Partials/Product.vue";
 import FilterSection from "./Partials/FilterSection.vue";
 export default {
@@ -77,6 +66,7 @@ export default {
 		Product,
 		JetLabel,
 		JetInput,
+		JetCheckbox,
 		FilterSection,
 	},
 };

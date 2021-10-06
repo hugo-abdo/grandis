@@ -28,14 +28,14 @@ export default createStore({
     },
     mutations: {
         INIT_APP(state) {
-            state.Echo = new Echo({
-                broadcaster: "pusher",
-                key: "GROADISSOCKETSKEY",
-                wsHost: "websocket.test",
-                wsPort: 6001,
-                forceTLS: false,
-                disableStats: true,
-            });
+            // state.Echo = new Echo({
+            //     broadcaster: "pusher",
+            //     key: "GROADISSOCKETSKEY",
+            //     wsHost: "websocket.test",
+            //     wsPort: 6001,
+            //     forceTLS: false,
+            //     disableStats: true,
+            // });
         },
         HANDEL_NOTIFICATIONS(state, notification) {
             // state.hasNotificatios = true;

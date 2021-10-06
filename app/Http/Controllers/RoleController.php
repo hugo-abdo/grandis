@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role as ModelsRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
@@ -11,6 +12,18 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        Inertia::share([
+            "can" => function () {
+                $permisions = [];
+                Gate::check('viewAny', auth()->user()) && array_push($permisions, 'show_user');
+                Gate::check('update', auth()->user()) && array_push($permisions, 'edit_user', '');
+                Gate::check('create', auth()->user()) && array_push($permisions, 'create_user');
+                return $permisions;
+            },
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +31,6 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('show_role');
         $model_query = Role::query()->with('permissions');
 
         return Inertia::render('Roles/Index', [
@@ -35,7 +47,6 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $this->authorize('create_role');
         return Inertia::render('Roles/Create');
     }
 
@@ -47,7 +58,6 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create_role');
         $data = $request->validate([
             'name' => ['required', 'string', 'unique:roles'],
             'color' => ['required', 'string'],
@@ -77,7 +87,6 @@ class RoleController extends Controller
      */
     public function edit(ModelsRole $role)
     {
-        $this->authorize('edit_role');
         $permissions = Permission::all();
         $roles = Role::all();
 
@@ -100,7 +109,6 @@ class RoleController extends Controller
      */
     public function update(Request $request, ModelsRole $role)
     {
-        $this->authorize('edit_role');
         $data = $request->validate([
             'name' => ['required', 'string', Rule::unique('roles')->ignore($role->id)],
             'color' => ['required', 'string'],
@@ -124,9 +132,9 @@ class RoleController extends Controller
             'name' => $data['name'],
             'color' => $data['color'],
         ]);
-        banner('success', 'role updated');
+        banner('success', 'role updated successfuly');
 
-        return redirect()->route('roles.index');
+        return back(303);
     }
 
     /**
@@ -137,7 +145,6 @@ class RoleController extends Controller
      */
     public function destroy(Role $role, Request $request)
     {
-        $this->authorize('delete_role');
         if ($role->name == 'admin') {
             banner('warning', 'you can\'t delete the admin');
             return back(303);

@@ -10,7 +10,7 @@
 		<button
 			v-show="isActive"
 			class="cursor-pointer rounded-full px-1 leading-none shadow-md hover:shadow-groadis active:shadow-none"
-			v-tooltip="{ content: tooltipMsg }"
+			v-tooltip.left="{ content: tooltipMsg }"
 		>
 			<slot />
 		</button>

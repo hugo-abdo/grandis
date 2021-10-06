@@ -12,7 +12,7 @@
         @routes
         @vite
     </head>
-    <body class="font-sans scrollbar-thin  scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-groadis dark:scrollbar-thumb-groadis-dark bg-gray-200 duration-200 dark:bg-groadis-darker ">
+    <body class="font-sans scrollbar-thin  scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-track-gray-200 dark:scrollbar-track-groadis-darker scrollbar-thumb-white dark:scrollbar-thumb-groadis-dark bg-gray-200 duration-200 dark:bg-groadis-darker">
         @inertia
     </body>
 </html>

@@ -149,10 +149,9 @@ export default {
                     onSuccess(page) {
                         state.selectedUsers.map((id) => {
                             state.data.map((user, index) => {
-                                if (user.id == id) {
-                                    state.data[index].is_active =
-                                        !state.data[index].is_active;
-                                }
+                                user.id == id
+                                    ? (state.data[index].is_active = true)
+                                    : null;
                             });
                         });
                     },

@@ -14,7 +14,7 @@
 				v-if="$store.getters.hasNotificatios"
 				class="bg-red-500 w-1.5 h-1.5 absolute top-1 right-1 ring-1 ring-white rounded-full"
 			></span>
-			<i class="las la-bell text-xl text-gray-400 mr-2 "></i>
+			<i class="las la-bell text-xl text-gray-400 mr-2"></i>
 		</template>
 
 		<template #content>
@@ -73,10 +73,10 @@ export default {
 
 		state.notifications = page.notifications.data;
 
-		!state.Echo.connector.channels[`private-App.Models.User.${user.id}`] &&
-			state.Echo.private(`App.Models.User.${user.id}`).notification((n) =>
-				commit("HANDEL_NOTIFICATIONS", n)
-			);
+		// !state.Echo.connector.channels[`private-App.Models.User.${user.id}`] &&
+		// 	state.Echo.private(`App.Models.User.${user.id}`).notification((n) =>
+		// 		commit("HANDEL_NOTIFICATIONS", n)
+		// 	);
 
 		function readNotification(notification) {
 			state.hasNotificatios = false;

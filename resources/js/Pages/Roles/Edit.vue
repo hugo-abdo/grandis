@@ -1,7 +1,7 @@
 <template>
 	<form
 		@submit.prevent="updateRole"
-		class="grid grid-cols-12 gap-2"
+		class="grid grid-cols-12 items-start gap-2"
 	>
 		<card class="col-span-12 md:col-span-6 lg:col-span-4">
 			<!-- Profile Photo -->
@@ -21,7 +21,8 @@
 				>
 					<img
 						:src="`http://grandis.test/storage/roles/${role.name}.png`"
-						class="rounded-full h-32 w-32 object-cover border bg-white shadow-md p-2"
+						class="rounded-full h-32 w-32 object-cover border-4 bg-white shadow-md"
+						:style="{borderColor:form.color}"
 					/>
 				</div>
 
@@ -58,12 +59,14 @@
 						v-model="form.name"
 						autocomplete="name"
 					/>
-					<jet-input
+
+					<input
 						id="color"
 						type="color"
-						class="w-12 h-10 ml-2 cursor-pointer"
+						class="ml-2 w-6 h-6 cursor-pointer"
 						v-model="form.color"
 					/>
+
 				</div>
 				<jet-input-error
 					:message="form.errors.name"
@@ -89,53 +92,46 @@
 			</div>
 		</card>
 		<card class="col-span-12 md:col-span-6 lg:col-span-8 text-gray-700">
-			<h2 class="font-medium">Permissions :</h2>
-			<ul class="grid grid-cols-12 gap-5 mt-2">
+			<h2 class="font-medium text-xl"><i class="las la-unlock-alt mr-2"></i>User Have This Permissions.</h2>
+			<ul class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-5 mt-4 ml-6">
 				<template
 					v-for="permission in permissions"
 					:key="permission.id"
 				>
-					<li class="col-span-6 sm:col-span-4 md:col-span-6 flex justify-between items-center group">
-						<label
-							:for="`${permission.id}-checkbox`"
-							class="cursor-pointer capitalize min-w-max"
-						>{{permission.name.replaceAll('_',' ',) }}</label>
-						<label
-							:for="`${permission.id}-checkbox`"
-							class="cursor-pointer border-b-4 border-dashed w-full mx-2 group-hover:border-groadis"
-						></label>
+					<li class="flex items-center group">
 						<input
-							class="focus:ring-0 text-groadis"
+							class="rounded-md border-gray-300 text-groadis shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mr-2"
 							:id="`${permission.id}-checkbox`"
 							:value="permission.id"
 							v-model="form.permissions"
 							type="checkbox"
 						/>
+						<label
+							:for="`${permission.id}-checkbox`"
+							class="cursor-pointer capitalize min-w-max"
+						>{{permission.name.replaceAll('_',' ',) }}</label>
 					</li>
 				</template>
 			</ul>
-			<h2 class="font-medium mt-4">User Can See this roles :</h2>
-			<ul class="grid grid-cols-12 gap-5 mt-2">
+			<h2 class="font-medium text-xl mt-4"><i class="las la-user-shield mr-2"></i>User Can See this roles.</h2>
+			<ul class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-5 mt-4 ml-6">
 				<template
 					v-for="role in roles"
 					:key="role.id"
 				>
-					<li class="col-span-6 sm:col-span-4 md:col-span-6 flex justify-between items-center group">
-						<label
-							:for="`${role.id}-role-checkbox`"
-							class="cursor-pointer capitalize min-w-max"
-						>{{role.name.replaceAll('_',' ',) }}</label>
-						<label
-							:for="`${role.id}-role-checkbox`"
-							class="cursor-pointer border-b-4 border-dashed w-full mx-2 group-hover:border-groadis"
-						></label>
+					<li class="flex items-center group">
 						<input
-							class="focus:ring-0 text-groadis"
+							class="rounded-md border-gray-300 text-groadis shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mr-2"
 							:id="`${role.id}-role-checkbox`"
 							:value="role.id"
 							v-model="form.roles"
 							type="checkbox"
 						/>
+						<label
+							:for="`${role.id}-role-checkbox`"
+							class="cursor-pointer capitalize min-w-max"
+						>{{role.name.replaceAll('_',' ',) }}</label>
+
 					</li>
 				</template>
 			</ul>
@@ -191,13 +187,18 @@ export default defineComponent({
 			if (this.$refs.photo) {
 				this.form.photo = this.$refs.photo.files[0];
 			}
-			this.form.put(route("roles.update", this.role.id), {
-				onSuccess: (page) => {
-					this.photoPreview = null;
-					this.clearPhotoFileInput();
-					this.form.reset();
-				},
-			});
+			this.form.put(
+				route("roles.update", this.role.id),
+				{},
+				{
+					preserveState: true,
+					onSuccess: (page) => {
+						this.photoPreview = null;
+						this.clearPhotoFileInput();
+						this.form.reset();
+					},
+				}
+			);
 		},
 
 		selectNewPhoto() {

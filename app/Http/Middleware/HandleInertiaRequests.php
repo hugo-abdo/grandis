@@ -51,7 +51,6 @@ class HandleInertiaRequests extends Middleware
                 return array_merge(
                     $request->user()->toArray(),
                     [
-                        "can" => $request->user()->getAllPermissions()->pluck('name'),
                         'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams() : null,
                         'two_factor_enabled' => !is_null($request->user()->two_factor_secret),
                     ]

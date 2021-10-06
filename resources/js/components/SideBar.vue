@@ -1,15 +1,12 @@
 <template>
 	<!-- Primary Navigation Menu -->
-	<nav
-		@mouseenter="$store.state.sideBarActive = true"
-		@mouseleave="$store.state.sideBarActive = false"
-		:class="[
-		'fixed inset-y-0 duration-200 z-[49] hidden sm:block  overflow-hidden',
-		$store.state.sideBarActive ? 'w-52': 'w-12'
-	]"
-	>
-		<div class="pl-1 relative bg-white duration-200 shadow-md h-full dark:bg-groadis-dark">
-			<div class="p-3">
+	<nav :class="[
+			'fixed inset-y-0 duration-200 z-[49] overflow-hidden',
+			$store.state.sideBarActive ? 'w-44': 'w-0 sm:w-12'
+		]">
+		<div class="pl-2 relative bg-white duration-200 shadow-md h-full dark:bg-groadis-dark">
+
+			<div class="p-3 pl-1.5">
 				<jet-application-mark />
 			</div>
 
@@ -20,14 +17,12 @@
 				>
 					<jet-nav-link
 						:href="route(link.pathName)"
-						class="capitalize group "
+						class="capitalize group"
 					>
 						<i
-							:class="[
-							link.iconClass,
-							{'bg-groadis px-1 text-white rounded-md shadow-groadis':route().current(link.isActive)} 
-							]"
-							class="text-xl mr-2 "
+							v-tooltip.right-end="!$store.state.sideBarActive &&link.name"
+							:class="[link.iconClass,{'bg-groadis px-1 text-white rounded-md shadow-groadis':route().current(link.isActive)}]"
+							class="text-xl mr-2"
 						></i>
 						<span class="group-hover:ml-4 ml-2 duration-200">{{link.name}}</span>
 					</jet-nav-link>

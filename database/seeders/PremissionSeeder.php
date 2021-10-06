@@ -11,6 +11,7 @@ class PremissionSeeder extends Seeder
 
     public $permissions = [
         // user permissions
+        'menage_users',
         'create_user',
         'delete_user',
         'edit_user',
@@ -18,11 +19,13 @@ class PremissionSeeder extends Seeder
         'edit_user_status',
         'change_user_role',
         // role permissions
+        'menage_roles',
         'create_role',
         'edit_role',
         'show_role',
         'delete_role',
         // products permisions
+        'menage_products',
         'create_product',
         'edit_product',
         'show_product',
