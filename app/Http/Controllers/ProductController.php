@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return inertiaPro('Shop/Index', []);
+        return inertiaPro('Shop/Index');
     }
 
     /**
@@ -24,7 +24,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+
+        return inertiaPro('Shop/Create', [
+            'conditions' => fn() => Product::$conditions,
+            'sizes' => fn() => Product::$sizes,
+        ]);
     }
 
     /**

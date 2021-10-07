@@ -132,7 +132,7 @@
 		<!-- Page Content -->
 		<main :class="[
 				'mt-20 px-5 sm:pr-4 duration-200 max-w-7xl mx-auto',
-				$store.state.sideBarActive ? 'pl-[11.5rem] max-w-full': 'sm:pl-14'
+				$store.state.sideBarActive ? 'transform translate-x-[11.5rem] md:translate-x-0 md:pl-[11.5rem] max-w-full': 'sm:pl-14'
 			]">
 			<slot></slot>
 		</main>

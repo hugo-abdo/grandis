@@ -1,4 +1,16 @@
 <template>
+	<actions>
+		<action-button
+			v-if="can('create_product')"
+			:isActive="true"
+			class="bg-groadis text-white"
+			tooltipMsg="Add New product"
+		>
+			<Link :href="route('products.create')">
+			<i class="las la-plus-circle text-xl"></i>
+			</Link>
+		</action-button>
+	</Actions>
 	<div class="flex gap-x-4 items-start">
 		<div class="text-gray-600 sticky top-20 hidden sm:block w-1/3 md:w-1/4">
 			<card class="col-span-full flex items-center p-0 dark:text-gray-400 relative">
@@ -56,10 +68,13 @@
 </template>
 
 <script>
-import JetLabel from "../../components/Label.vue";
-import JetInput from "../../components/Input.vue";
-import JetCheckbox from "../../components/Checkbox.vue";
+import ActionButton from "@/components/ActionButton.vue";
+import JetCheckbox from "@/components/Checkbox.vue";
+import JetInput from "@/components/Input.vue";
+import JetLabel from "@/components/Label.vue";
+import Actions from "@/components/Actions.vue";
 import Product from "./Partials/Product.vue";
+import { Link } from "@inertiajs/inertia-vue3";
 import FilterSection from "./Partials/FilterSection.vue";
 export default {
 	components: {
@@ -68,6 +83,9 @@ export default {
 		JetInput,
 		JetCheckbox,
 		FilterSection,
+		Actions,
+		ActionButton,
+		Link,
 	},
 };
 </script>

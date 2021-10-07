@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->text('summary');
             $table->longText('description')->nullable();
-            $table->enum('condition', ['default', 'new', 'hot'])->default('default');
+            $table->enum('condition', Product::$conditions)->default('default');
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +22,7 @@ class CreateStocksTable extends Migration
             $table->integer('count')->default(1);
             $table->float('price');
             $table->float('discount')->nullabale();
-            $table->enum('size', ['xxs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'])->default('m');
+            $table->enum('size', Product::$sizes)->default('m');
             $table->timestamps();
         });
     }

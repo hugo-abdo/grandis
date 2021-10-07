@@ -37,5 +37,6 @@ module.exports = {
         require("@tailwindcss/forms"),
         require("@tailwindcss/typography"),
         require("@windicss/plugin-scrollbar"),
+        require("@tailwindcss/aspect-ratio"),
     ],
 };
